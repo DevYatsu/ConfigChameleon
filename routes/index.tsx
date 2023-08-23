@@ -5,12 +5,12 @@ export type PropsWithChildren<T> = { children: ComponentChildren } & T;
 
 export default function Home() {
   return (
-    <main class="h-full min-h-screen bg-gray-900 text-white">
+    <main class="h-full min-h-screen bg-indigo-300 dark:bg-gray-900 text-white">
       <h1 class="text-slate-900 font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-center px-5 py-12">
         Convert files with ease !
       </h1>
-      <div class="flex items-center pb-4">
-        <div class="h-full w-full grid lg:grid-cols-8 sm:grid-cols-2 grid-cols-1 gap-y-6 sm:gap-y-0">
+      <div class="flex items-center justify-center pb-4 pt-5 sm:pt-12 lg:pt-20">
+        <div class="h-full w-full grid grid-cols-1 gap-y-6 sm:grid-cols-2 lg:grid-cols-4 container">
           <ButtonsSection title="CSV">
             <Button href="/csv/json" variant="JSON" />
             <Button href="/csv/excel" variant="XLSX" />
