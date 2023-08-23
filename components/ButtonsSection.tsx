@@ -20,7 +20,6 @@ export default function ButtonsSection(
           {title}
           <span class="text(indigo-500 4xl lg:5xl) tracking-smallest font-extrabold absolute z-50 lg:top-10 top-6 left-5">
             To
-            <span class="w-12 h-12 rounded-3xl bg-white white"></span>
           </span>
         </h2>
         <div class="flex items-center justify-center flex-col gap-y-8">
