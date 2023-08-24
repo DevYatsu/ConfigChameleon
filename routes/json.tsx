@@ -8,7 +8,11 @@ type Todo = {
 
 export const handler: Handlers<Todo> = {
   async GET(_req, ctx) {
-    const data = await fetch("https://jsonplaceholder.typicode.com/todos/250")
+    const data = await fetch(
+      `https://jsonplaceholder.typicode.com/todos/${
+        Math.floor(Math.random() * 101)
+      }`,
+    )
       .then((response) => response.json());
     if (!data) {
       return new Response("Todo not found", { status: 404 });

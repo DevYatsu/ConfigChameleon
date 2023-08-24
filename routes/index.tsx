@@ -5,7 +5,7 @@ export type PropsWithChildren<T> = { children: ComponentChildren } & T;
 
 export default function Home() {
   return (
-    <main class="h-full min-h-screen bg-indigo-300 dark:bg-gray-900 text-white">
+    <>
       <h1 class="text-slate-900 font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-center px-5 py-12">
         Convert files with ease !
       </h1>
@@ -37,6 +37,6 @@ export default function Home() {
           </ButtonsSection>
         </div>
       </div>
-    </main>
+    </>
   );
 }

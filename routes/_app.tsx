@@ -9,7 +9,9 @@ export default function App({ Component }: AppProps) {
         <title>CsvJsonConverter</title>
       </head>
       <body>
-        <Component />
+        <main class="h-full min-h-screen bg-indigo-300 dark:bg-gray-900 text-white">
+          <Component />
+        </main>
       </body>
     </html>
   );
