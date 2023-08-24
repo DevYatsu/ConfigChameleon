@@ -9,7 +9,10 @@ import * as $3 from "./routes/csv/[outputType].tsx";
 import * as $4 from "./routes/greet/[name].tsx";
 import * as $5 from "./routes/index.tsx";
 import * as $6 from "./routes/json.tsx";
-import * as $7 from "./routes/password.tsx";
+import * as $7 from "./routes/json/[outputType].tsx";
+import * as $8 from "./routes/password.tsx";
+import * as $9 from "./routes/xml/[outputType].tsx";
+import * as $10 from "./routes/yaml/[outputType].tsx";
 
 const manifest = {
   routes: {
@@ -20,7 +23,10 @@ const manifest = {
     "./routes/greet/[name].tsx": $4,
     "./routes/index.tsx": $5,
     "./routes/json.tsx": $6,
-    "./routes/password.tsx": $7,
+    "./routes/json/[outputType].tsx": $7,
+    "./routes/password.tsx": $8,
+    "./routes/xml/[outputType].tsx": $9,
+    "./routes/yaml/[outputType].tsx": $10,
   },
   islands: {},
   baseUrl: import.meta.url,
