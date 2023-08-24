@@ -1,11 +1,14 @@
 import Button from "../components/FormatButton.tsx";
 import { ComponentChildren } from "preact";
 import ButtonsSection from "../components/ButtonsSection.tsx";
+import NavBar from "../components/Navbar.tsx";
+import { PageProps } from "$fresh/server.ts";
 export type PropsWithChildren<T> = { children: ComponentChildren } & T;
 
-export default function Home() {
+export default function Home({ route }: PageProps) {
   return (
     <>
+      <NavBar route={route} />
       <h1 class="text-slate-900 font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-center px-5 py-12">
         Convert files with ease !
       </h1>

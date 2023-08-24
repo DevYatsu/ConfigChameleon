@@ -7,17 +7,17 @@ const navLinks = [
 ];
 
 export default function NavBar(
-  { route, cls }: { route: string; cls?: string },
+  { route, cls }: { route?: string; cls?: string },
 ) {
   return (
     <nav
-      class={tw`w-full text-white bg-gray-900 h-24 flex justify-center ${cls}`}
+      class={tw`w-full text-white bg-indigo-900 flex sm:justify-center ${cls}`}
     >
-      <ul class="space-x-8 py-7">
+      <ul class="sm:space-x-8 space-y-2 sm:space-y-0 py-3 sm:py-5 px-7">
         {navLinks.map((el) => {
           if (route != el.link) {
             return (
-              <li class="inline">
+              <li class="sm:inline">
                 <a
                   href={el.link}
                   target={el.target ? el.target : ""}
@@ -28,12 +28,12 @@ export default function NavBar(
             );
           } else {
             return (
-              <li class="inline">
+              <li class="sm:inline">
                 <a
                   href={el.link}
                   target={el.target ? el.target : ""}
                   aria-current="page"
-                  class="text-blue-500"
+                  class="text-blue-400"
                 >
                   {el.name}
                 </a>

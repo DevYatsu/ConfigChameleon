@@ -22,7 +22,7 @@ export default function ConvertionPage(
           content={`A simple way to convert ${title.toLowerCase()}.`}
         />
       </Head>
-      <div class="h-full min-h-screen text-white container text-center py-8 px-3 flex flex-col items-center justify-center">
+      <div class="h-full min-h-screen text-white text-center py-8 px-3 flex flex-col items-center justify-center">
         <h2 class="font-bold text-3xl tracking-tight sm:text-4xl">
           {title}
         </h2>

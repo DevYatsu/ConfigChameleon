@@ -1,8 +1,10 @@
 import { PageProps } from "$fresh/server.ts";
+import NavBar from "../../components/Navbar.tsx";
 
 export default function Greet(props: PageProps) {
   return (
     <div class="h-screen grid items-center bg-gray-900 text-white">
+      <NavBar cls="absolute top-0" />
       <span class="text(center 3xl)">
         Hello{" "}
         <span
