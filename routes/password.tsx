@@ -25,6 +25,8 @@ function generateComplexPassword() {
 }
 
 import { Handlers, PageProps } from "$fresh/server.ts";
+import { Head } from "$fresh/runtime.ts";
+import NavBar from "../components/Navbar.tsx";
 
 export const handler: Handlers = {
   GET(_req, ctx) {
@@ -32,15 +34,25 @@ export const handler: Handlers = {
   },
 };
 
-export default function PasswordPage({ data }: PageProps) {
+export default function PasswordPage({ data, route }: PageProps) {
   return (
-    <div class="container h-full min-h-screen flex flex-col sm:flex-row justify-center items-center py-12 px-5">
-      <h1 class="px-5 text-2xl text-red-500 md:text-3xl">
-        Random Password:
-      </h1>
-      <p class="text-2xl font-bold leading-7 text-white sm:truncate sm:text-3xl sm:tracking-tight">
-        {data}
-      </p>
-    </div>
+    <>
+      <Head>
+        <title>Passwords Generator</title>
+        <meta
+          name="description"
+          content="A simple random passwords generator. Reload and a new password is generated."
+        />
+      </Head>
+      <div class="h-full min-h-screen w-full flex flex-col items-center sm:flex-row justify-center pt-12 px-5 container h-full pb-24">
+        <NavBar route={route} cls="absolute top-0" />
+        <h1 class="px-5 text-2xl text-red-500 md:text-3xl">
+          Random Password:
+        </h1>
+        <p class="text-2xl font-bold leading-7 text-white sm:truncate sm:text-3xl sm:tracking-tight ">
+          {data}
+        </p>
+      </div>
+    </>
   );
 }

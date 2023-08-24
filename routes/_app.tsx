@@ -1,4 +1,5 @@
 import { AppProps } from "$fresh/server.ts";
+import NavBar from "../components/Navbar.tsx";
 
 export default function App({ Component }: AppProps) {
   return (
@@ -6,10 +7,9 @@ export default function App({ Component }: AppProps) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>CsvJsonConverter</title>
       </head>
       <body>
-        <main class="h-full min-h-screen bg-indigo-300 dark:bg-gray-900 text-white">
+        <main class="h-full min-h-screen bg-indigo-300 dark:bg-gray-900 text-white flex justify-center">
           <Component />
         </main>
       </body>
