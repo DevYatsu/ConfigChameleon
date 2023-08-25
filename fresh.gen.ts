@@ -13,6 +13,7 @@ import * as $7 from "./routes/json/[outputType].tsx";
 import * as $8 from "./routes/password.tsx";
 import * as $9 from "./routes/xml/[outputType].tsx";
 import * as $10 from "./routes/yaml/[outputType].tsx";
+import * as $$0 from "./islands/FileInput.tsx";
 
 const manifest = {
   routes: {
@@ -28,7 +29,9 @@ const manifest = {
     "./routes/xml/[outputType].tsx": $9,
     "./routes/yaml/[outputType].tsx": $10,
   },
-  islands: {},
+  islands: {
+    "./islands/FileInput.tsx": $$0,
+  },
   baseUrl: import.meta.url,
 };
 

@@ -1,14 +1,15 @@
 import { PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
-import FileInput from "./FileInput.tsx";
+import FileInput from "../islands/FileInput.tsx";
 
 type ConvertionPageProps = {
   title: string;
   inputType: string;
+  outputType: string;
 } & PageProps;
 
 export default function ConvertionPage(
-  { title, inputType }: ConvertionPageProps,
+  { title, inputType, outputType }: ConvertionPageProps,
 ) {
   return (
     <>
@@ -27,7 +28,7 @@ export default function ConvertionPage(
           {title}
         </h2>
         <div class="pt-12 md:pt-28">
-          <FileInput filetype={inputType} />
+          <FileInput filetype={inputType} outputType={outputType} />
         </div>
       </div>
     </>
