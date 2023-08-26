@@ -8,6 +8,7 @@ export default function FileInput(
 
   const handleFileChange = (e: any) => { // cant find the OnChange event type with preact
     const file: File = e?.target?.files[0];
+    console.dir(e?.target);
     if (file.type.indexOf(filetype) === -1) {
       throw new Error("Invalid File Type!");
     }
