@@ -1,20 +1,58 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
+import { stringify } from "$std/yaml/mod.ts";
 import ConvertionPage from "../../components/ConvertionPage.tsx";
+import { getNameWithoutExtension } from "../../utils/file.ts";
 import { retrieveRequestFile } from "../../utils/retrieveRequestFile.ts";
+import { yamlFile } from "../../utils/yaml.ts";
 
 export const handler: Handlers<File> = {
-  async POST(req, _ctx) {
+  async POST(req, ctx) {
     const fileType = "json";
-    const file = await retrieveRequestFile(req, fileType);
+    const outputType: string = ctx.params.outputType;
 
-    if (!file) {
-      return new Response("Internal Server Error", { status: 500 });
+    try {
+      const file = await retrieveRequestFile(req, fileType);
+
+      if (!file) {
+        return new Response("Internal Server Error", { status: 500 });
+      }
+      if (file instanceof Response) {
+        const error = file;
+        return error;
+      }
+
+      const fileName = getNameWithoutExtension(file);
+
+      const arrayBuffer = await file.arrayBuffer();
+      const uint8Array = new Uint8Array(arrayBuffer);
+      const textDecoder = new TextDecoder("utf-8");
+      const jsonContent = textDecoder.decode(uint8Array);
+      const contentObj = JSON.parse(jsonContent);
+
+      switch (outputType) {
+        case "xml":
+          break;
+        case "yaml": {
+          const yamlContent = stringify(contentObj);
+          const file: File = yamlFile(
+            `${fileName}.yaml`,
+            yamlContent,
+          );
+          console.log(file);
+          return new Response(file);
+        }
+        case "csv":
+          break;
+        default:
+          return new Response("Output type ${outputType} not supported", {
+            status: 400,
+          });
+      }
+
+      return new Response(null);
+    } catch (error) {
+      return new Response(error, { status: 500 });
     }
-    if (file instanceof Response) {
-      return file;
-    }
-    // file is file
-    return new Response(null);
   },
 };
 

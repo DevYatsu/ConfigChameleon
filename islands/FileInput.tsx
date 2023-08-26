@@ -1,33 +1,46 @@
 import { useEffect, useState } from "preact/hooks";
+import { downloadFile, getNameWithoutExtension } from "../utils/file.ts";
 
 export default function FileInput(
   { filetype, outputType }: { filetype: string; outputType: string },
 ) {
-  const [file, setFile] = useState(null);
+  const [initialFile, setInitialFile] = useState<File | null>(null);
 
   const handleFileChange = (e: any) => { // cant find the OnChange event type with preact
     const file = e?.target?.files[0];
-    if (file.type.indexOf("json") === -1) {
+    if (file.type.indexOf(filetype) === -1) {
       throw new Error("Invalid File Type!");
     }
     if (file) {
-      setFile(file);
+      setInitialFile(file);
     }
   };
 
   useEffect(() => {
-    if (file) {
-      console.log(file);
-      const formData = new FormData();
-      formData.append("file", file);
+    const fetchDataAndDownload = async () => {
+      if (initialFile) {
+        const formData = new FormData();
+        formData.append("file", initialFile);
 
-      const url = `/${filetype}/${outputType}`;
+        const url = `/${filetype}/${outputType}`;
 
-      fetch(url, { method: "POST", body: formData }).then((res) =>
-        console.log(res)
-      ).catch((err) => console.log(err));
-    }
-  }, [file]);
+        try {
+          const response = await fetch(url, { method: "POST", body: formData });
+          const blob = await response.blob();
+
+          const outputFileName = `${
+            getNameWithoutExtension(initialFile)
+          }.${outputType}`;
+
+          downloadFile(outputFileName, blob);
+        } catch (error) {
+          console.error("Error fetching or downloading:", error);
+        }
+      }
+    };
+
+    fetchDataAndDownload();
+  }, [initialFile]);
 
   return (
     <div class="flex justify-center py-8 px-5 h-full">
@@ -37,7 +50,7 @@ export default function FileInput(
           name="file"
           type="file"
           accept={`.${filetype}`}
-          onChange={handleFileChange}
+          onInput={handleFileChange}
         />
         <svg
           xmlns="http://www.w3.org/2000/svg"
