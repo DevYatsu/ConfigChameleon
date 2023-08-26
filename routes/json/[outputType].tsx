@@ -3,7 +3,7 @@ import { stringify } from "$std/yaml/mod.ts";
 import ConvertionPage from "../../components/ConvertionPage.tsx";
 import { generateFile } from "../../utils/file.ts";
 import { retrieveRequestFile } from "../../utils/retrieveRequestFile.ts";
-import { JSONLinesStringifyStream } from "jsonlines";
+import JsonToCSV from "npm:papaparse@5.0.2";
 
 export const handler: Handlers<File> = {
   async POST(req, ctx) {
@@ -44,11 +44,23 @@ export const handler: Handlers<File> = {
           );
           return new Response(file);
         }
-        case "csv":
-          break;
+        case "csv": {
+          if (jsonObj instanceof Array) {
+            const csvContent = JsonToCSV.unparse(jsonObj);
+            console.log(csvContent);
+            const file: File = generateFile(
+              csvContent,
+              "application/jsonl",
+            );
+            return new Response(file);
+          } else {
+            return new Response("Invalid json content", { status: 400 });
+          }
+        }
+
         case "jsonl": {
           let jsonlContent = "";
-          
+
           if (jsonObj instanceof Array) {
             jsonlContent = jsonObj.map((obj) => JSON.stringify(obj) + "\n")
               .join("");
