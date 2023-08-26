@@ -1,9 +1,9 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { stringify } from "$std/yaml/mod.ts";
 import ConvertionPage from "../../components/ConvertionPage.tsx";
-import { getNameWithoutExtension } from "../../utils/file.ts";
+import { generateFile } from "../../utils/file.ts";
 import { retrieveRequestFile } from "../../utils/retrieveRequestFile.ts";
-import { yamlFile } from "../../utils/yaml.ts";
+import { JSONLinesStringifyStream } from "jsonlines";
 
 export const handler: Handlers<File> = {
   async POST(req, ctx) {
@@ -21,30 +21,49 @@ export const handler: Handlers<File> = {
         return error;
       }
 
-      const fileName = getNameWithoutExtension(file);
-
       const arrayBuffer = await file.arrayBuffer();
       const uint8Array = new Uint8Array(arrayBuffer);
       const textDecoder = new TextDecoder("utf-8");
       const jsonContent = textDecoder.decode(uint8Array);
-      const contentObj = JSON.parse(jsonContent);
+      const jsonObj = JSON.parse(jsonContent);
+
+      if (typeof jsonObj !== "object") {
+        return new Response("Format error in json file", {
+          status: 400,
+        });
+      }
 
       switch (outputType) {
         case "xml":
           break;
         case "yaml": {
-          const yamlContent = stringify(contentObj);
-          const file: File = yamlFile(
-            `${fileName}.yaml`,
+          const yamlContent = stringify(jsonObj);
+          const file: File = generateFile(
             yamlContent,
+            "application/yaml",
           );
-          console.log(file);
           return new Response(file);
         }
         case "csv":
           break;
+        case "jsonl": {
+          let jsonlContent = "";
+          
+          if (jsonObj instanceof Array) {
+            jsonlContent = jsonObj.map((obj) => JSON.stringify(obj) + "\n")
+              .join("");
+          } else {
+            jsonlContent = JSON.stringify(jsonObj) + "\n";
+          }
+
+          const file: File = generateFile(
+            jsonlContent,
+            "application/jsonl",
+          );
+          return new Response(file);
+        }
         default:
-          return new Response("Output type ${outputType} not supported", {
+          return new Response(`Output type ${outputType} not supported`, {
             status: 400,
           });
       }
