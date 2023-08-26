@@ -4,6 +4,7 @@ import ConvertionPage from "../../components/ConvertionPage.tsx";
 import { generateFile } from "../../utils/file.ts";
 import { retrieveRequestFile } from "../../utils/retrieveRequestFile.ts";
 import JsonToCSV from "npm:papaparse@5.0.2";
+import { js2xml } from "js2xml";
 
 export const handler: Handlers<File> = {
   async POST(req, ctx) {
@@ -34,8 +35,17 @@ export const handler: Handlers<File> = {
       }
 
       switch (outputType) {
-        case "xml":
-          break;
+        case "xml": {
+          const xmlContent = js2xml(jsonObj, {
+            compact: true,
+            spaces: 4,
+          });
+          const file: File = generateFile(
+            xmlContent,
+            "application/xml",
+          );
+          return new Response(file);
+        }
         case "yaml": {
           const yamlContent = stringify(jsonObj);
           const file: File = generateFile(
@@ -50,7 +60,7 @@ export const handler: Handlers<File> = {
             console.log(csvContent);
             const file: File = generateFile(
               csvContent,
-              "application/jsonl",
+              "application/csv",
             );
             return new Response(file);
           } else {
@@ -79,8 +89,6 @@ export const handler: Handlers<File> = {
             status: 400,
           });
       }
-
-      return new Response(null);
     } catch (error) {
       return new Response(error, { status: 500 });
     }

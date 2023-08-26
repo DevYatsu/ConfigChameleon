@@ -1,6 +1,7 @@
 import { PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import FileInput from "../islands/FileInput.tsx";
+import NavBar from "../islands/Navbar.tsx";
 
 type ConvertionPageProps = {
   title: string;
@@ -23,6 +24,7 @@ export default function ConvertionPage(
           content={`A simple way to convert ${title.toLowerCase()}.`}
         />
       </Head>
+      <NavBar cls="absolute top-0" />
       <div class="h-full min-h-screen text-white text-center py-8 px-3 flex flex-col items-center justify-center">
         <h2 class="font-bold text-3xl tracking-tight sm:text-4xl">
           {title}

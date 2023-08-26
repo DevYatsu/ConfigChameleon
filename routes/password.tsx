@@ -26,7 +26,7 @@ function generateComplexPassword() {
 
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
-import NavBar from "../components/Navbar.tsx";
+import NavBar from "../islands/Navbar.tsx";
 
 export const handler: Handlers = {
   GET(_req, ctx) {

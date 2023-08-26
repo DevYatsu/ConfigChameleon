@@ -1,5 +1,5 @@
 import { AppProps } from "$fresh/server.ts";
-import NavBar from "../components/Navbar.tsx";
+import NavBar from "../islands/Navbar.tsx";
 
 export default function App({ Component }: AppProps) {
   return (

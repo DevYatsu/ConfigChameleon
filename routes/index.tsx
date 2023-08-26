@@ -1,7 +1,7 @@
 import Button from "../components/FormatButton.tsx";
 import { ComponentChildren } from "preact";
 import ButtonsSection from "../components/ButtonsSection.tsx";
-import NavBar from "../components/Navbar.tsx";
+import NavBar from "../islands/Navbar.tsx";
 import { PageProps } from "$fresh/server.ts";
 export type PropsWithChildren<T> = { children: ComponentChildren } & T;
 

@@ -1,5 +1,5 @@
 import { PageProps } from "$fresh/server.ts";
-import NavBar from "../../components/Navbar.tsx";
+import NavBar from "../../islands/Navbar.tsx";
 
 export default function Greet(props: PageProps) {
   return (
