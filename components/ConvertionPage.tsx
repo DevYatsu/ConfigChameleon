@@ -18,7 +18,6 @@ export default function ConvertionPage(
         <title>
           {title}
         </title>
-        <link rel="stylesheet" href="/input.css" />
         <meta
           name="description"
           content={`A simple way to convert ${title.toLowerCase()}.`}

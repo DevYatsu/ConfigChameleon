@@ -64,7 +64,10 @@ export const handler: Handlers<File> = {
             );
             return new Response(file);
           } else {
-            return new Response("Invalid json content", { status: 400 });
+            return new Response(
+              "Json to Csv conversion requires specific json file content!",
+              { status: 400 },
+            );
           }
         }
 

@@ -1,10 +1,12 @@
-type Button = {
+import { FormatVariants } from "./ConversionButtonsSection.tsx";
+
+export type FormatButton = {
   text?: string;
-  variant: "XML" | "HTML" | "JSON" | "YAML" | "JSONL" | "CSV" | "XLSX";
+  variant: FormatVariants;
   href: string;
 };
 
-export default function FormatButton({ text, variant, href }: Button) {
+export default function FormatButton({ text, variant, href }: FormatButton) {
   const accentColor = variant == "JSON"
     ? "green-500"
     : variant == "HTML"

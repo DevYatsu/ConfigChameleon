@@ -1,3 +1,47 @@
+import { ErrorToast, SuccessToast } from "./Toast.ts";
+
+export const fetchDataAndDownloadFile = async (
+  initialFile: File | null,
+  filetype: string,
+  outputType: string,
+) => {
+  if (initialFile) {
+    const formData = new FormData();
+    formData.append("file", initialFile);
+
+    const url = `/${filetype}/${outputType}`;
+
+    try {
+      const response = await fetch(url, { method: "POST", body: formData });
+
+      if (!response.ok) {
+        const err = await response.text();
+        ErrorToast(
+          `${err}`,
+        );
+        return;
+      }
+
+      const blob = await response.blob();
+
+      const outputFileName = `${
+        getNameWithoutExtension(initialFile)
+      }.${outputType}`;
+      SuccessToast(
+        `${initialFile.name} was successfully converted to ${outputType}`,
+      );
+      downloadFile(outputFileName, blob);
+    } catch (error) {
+      ErrorToast(`Error: Are you sure the file content is valid ${filetype} ?`);
+      console.error("Error fetching or downloading:", error);
+    }
+  }
+};
+
+export function isFileSizeTooLarge(file: File, maxSizeInBytes: number) {
+  return file.size > maxSizeInBytes;
+}
+
 export function getNameWithoutExtension(arr: File): string {
   const nameArr = arr.name.split(".");
   nameArr.pop();
