@@ -1,10 +1,11 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import ConvertionPage from "../../components/ConvertionPage.tsx";
 import { retrieveRequestFile } from "../../utils/retrieveRequestFile.ts";
+import supportedFormatTypes from "../../utils/supportedFormatTypes.ts";
 
+const fileType = "csv";
 export const handler: Handlers<File> = {
   async POST(req, _ctx) {
-    const fileType = "csv";
     const file = await retrieveRequestFile(req, fileType);
 
     if (!file) {
@@ -15,6 +16,17 @@ export const handler: Handlers<File> = {
     }
     // file is file
     return new Response(null);
+  },
+  GET(req, ctx) {
+    const outputType: string = ctx.params.outputType;
+    console.log(req);
+    if (
+      supportedFormatTypes[fileType].indexOf(outputType.toUpperCase()) === -1
+    ) {
+      return ctx.renderNotFound();
+    }
+
+    return ctx.render();
   },
 };
 

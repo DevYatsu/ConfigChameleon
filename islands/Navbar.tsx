@@ -12,7 +12,7 @@ const navLinks = [
 export default function NavBar(
   { route, cls }: { route?: string; cls?: string },
 ) {
-  const [isHidden, setIsHidden] = useState(false);
+  const [isHidden, setIsHidden] = useState(true);
 
   function onClick() {
     setIsHidden((old) => !old);
@@ -24,7 +24,7 @@ export default function NavBar(
 
       if (windowWidth > 640) {
         setIsHidden(false);
-      } 
+      }
     };
 
     globalThis.addEventListener("resize", handleResize);

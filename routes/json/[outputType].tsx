@@ -1,15 +1,29 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { stringify as stringifyYaml } from "npm:yaml";
 import ConvertionPage from "../../components/ConvertionPage.tsx";
 import { generateFile } from "../../utils/file.ts";
 import { retrieveRequestFile } from "../../utils/retrieveRequestFile.ts";
-import JsonToCSV from "npm:papaparse@5.0.2";
-import { js2xml } from "js2xml";
+import {
+  JsonToCSV,
+  JsonToJSONL,
+  JsonToXml,
+  JsonToYaml,
+} from "../../utils/json.ts";
+import supportedFormatTypes from "../../utils/supportedFormatTypes.ts";
+import Error404 from "../_404.tsx";
+
+const fileType = "json";
 
 export const handler: Handlers<File> = {
   async POST(req, ctx) {
-    const fileType = "json";
     const outputType: string = ctx.params.outputType;
+
+    if (
+      supportedFormatTypes[fileType].indexOf(outputType.toUpperCase()) === -1
+    ) {
+      return new Response(`Output type ${outputType} not supported`, {
+        status: 400,
+      });
+    }
 
     try {
       const file = await retrieveRequestFile(req, fileType);
@@ -34,10 +48,7 @@ export const handler: Handlers<File> = {
 
       switch (outputType) {
         case "xml": {
-          const xmlContent = js2xml(jsonObj, {
-            compact: true,
-            spaces: 4,
-          });
+          const xmlContent = JsonToXml(jsonObj);
           const file: File = generateFile(
             xmlContent,
             "application/xml",
@@ -45,7 +56,7 @@ export const handler: Handlers<File> = {
           return new Response(file);
         }
         case "yaml": {
-          const yamlContent = stringifyYaml(jsonObj);
+          const yamlContent = JsonToYaml(jsonObj); // todo!
           const file: File = generateFile(
             yamlContent,
             "application/yaml",
@@ -54,8 +65,7 @@ export const handler: Handlers<File> = {
         }
         case "csv": {
           if (jsonObj instanceof Array) {
-            const csvContent = JsonToCSV.unparse(jsonObj);
-            console.log(csvContent);
+            const csvContent = JsonToCSV(jsonObj);
             const file: File = generateFile(
               csvContent,
               "application/csv",
@@ -70,15 +80,7 @@ export const handler: Handlers<File> = {
         }
 
         case "jsonl": {
-          let jsonlContent = "";
-
-          if (jsonObj instanceof Array) {
-            jsonlContent = jsonObj.map((obj) => JSON.stringify(obj) + "\n")
-              .join("");
-          } else {
-            jsonlContent = JSON.stringify(jsonObj) + "\n";
-          }
-
+          const jsonlContent = JsonToJSONL(jsonObj);
           const file: File = generateFile(
             jsonlContent,
             "application/jsonl",
@@ -93,6 +95,17 @@ export const handler: Handlers<File> = {
     } catch (error) {
       return new Response(error, { status: 500 });
     }
+  },
+  GET(req, ctx) {
+    const outputType: string = ctx.params.outputType;
+    console.log(req);
+    if (
+      supportedFormatTypes[fileType].indexOf(outputType.toUpperCase()) === -1
+    ) {
+      return ctx.renderNotFound();
+    }
+
+    return ctx.render();
   },
 };
 

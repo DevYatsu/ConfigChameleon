@@ -25,11 +25,7 @@ export default function Home({ route }: PageProps) {
       </div>
 
       <div class="flex items-center justify-center pb-0 pt-0 sm:pt-6 lg:pt-8">
-        <div class="h-full w-full grid grid-cols-1 gap-y-6 sm:grid-cols-2 lg:grid-cols-4 container">
-          <ConversionButtonsSection
-            title="CSV"
-            outputs={["JSON", "XLSX", "XML", "HTML"]}
-          />
+        <div class="h-full w-full grid grid-cols-1 sm:gap-y-6 sm:grid-cols-2 lg:grid-cols-4 container">
           <ConversionButtonsSection
             title="JSON"
             outputs={["YAML", "XML", "JSONL", "CSV"]}
@@ -37,6 +33,10 @@ export default function Home({ route }: PageProps) {
           <ConversionButtonsSection
             title="YAML"
             outputs={["CSV", "JSON", "XML", "HTML"]}
+          />
+          <ConversionButtonsSection
+            title="CSV"
+            outputs={["JSON", "XLSX", "XML", "HTML"]}
           />
           <ConversionButtonsSection
             title="XML"
