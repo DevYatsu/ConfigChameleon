@@ -1,20 +1,65 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import ConvertionPage from "../../components/ConvertionPage.tsx";
 import { retrieveRequestFile } from "../../utils/retrieveRequestFile.ts";
+import { parse as parseYaml } from "npm:yaml";
+import { generateFile } from "../../utils/file.ts";
 
 export const handler: Handlers<File> = {
-  async POST(req, _ctx) {
+  async POST(req, ctx) {
     const fileType = "yaml";
-    const file = await retrieveRequestFile(req, fileType);
+    const outputType: string = ctx.params.outputType;
 
-    if (!file) {
-      return new Response("Internal Server Error", { status: 500 });
+    try {
+      const file = await retrieveRequestFile(req, fileType);
+
+      if (!file) {
+        return new Response("Internal Server Error", { status: 500 });
+      }
+      if (file instanceof Response) {
+        const error = file;
+        return error;
+      }
+
+      const arrayBuffer = await file.arrayBuffer();
+      const uint8Array = new Uint8Array(arrayBuffer);
+      const textDecoder = new TextDecoder("utf-8");
+      const jsonContent = textDecoder.decode(uint8Array);
+      console.log("working");
+
+      try {
+        const jsonObj = parseYaml(jsonContent);
+
+        switch (outputType) {
+          case "json": {
+            const file = generateFile(
+              JSON.stringify(jsonObj),
+              "application/json",
+            );
+            return new Response(file);
+          }
+          case "html": {
+            break;
+          }
+          case "csv": {
+            break;
+          }
+
+          case "xml": {
+            break;
+          }
+          default:
+            return new Response(`Output type ${outputType} not supported`, {
+              status: 400,
+            });
+        }
+      } catch (error) {
+        console.log(error);
+        return new Response(`Invalid ${fileType} format`, { status: 422 });
+      }
+    } catch (error) {
+      return new Response(error, { status: 500 });
     }
-    if (file instanceof Response) {
-      return file;
-    }
-    // file is file
-    return new Response(null);
+    return new Response();
   },
 };
 

@@ -1,5 +1,5 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { stringify } from "$std/yaml/mod.ts";
+import { stringify as stringifyYaml } from "npm:yaml";
 import ConvertionPage from "../../components/ConvertionPage.tsx";
 import { generateFile } from "../../utils/file.ts";
 import { retrieveRequestFile } from "../../utils/retrieveRequestFile.ts";
@@ -29,9 +29,7 @@ export const handler: Handlers<File> = {
       const jsonObj = JSON.parse(jsonContent);
 
       if (typeof jsonObj !== "object") {
-        return new Response("Format error in json file", {
-          status: 400,
-        });
+        return new Response("Invalid json format", { status: 422 });
       }
 
       switch (outputType) {
@@ -47,7 +45,7 @@ export const handler: Handlers<File> = {
           return new Response(file);
         }
         case "yaml": {
-          const yamlContent = stringify(jsonObj);
+          const yamlContent = stringifyYaml(jsonObj);
           const file: File = generateFile(
             yamlContent,
             "application/yaml",
