@@ -90,7 +90,6 @@ export const handler: Handlers<File> = {
     } catch (error) {
       return new Response(error, { status: 500 });
     }
-    return new Response();
   },
 };
 
