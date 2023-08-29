@@ -9,6 +9,7 @@ import {
   JsonToYaml,
 } from "../../utils/json.ts";
 import supportedFormatTypes from "../../utils/supportedFormatTypes.ts";
+import { FormatVariants } from "../../components/ConversionButtonsSection.tsx";
 
 const fileType = "json";
 
@@ -17,7 +18,7 @@ export const handler: Handlers<File> = {
     const outputType: string = ctx.params.outputType;
 
     if (
-      supportedFormatTypes[fileType].indexOf(outputType.toUpperCase()) === -1
+      supportedFormatTypes[fileType].indexOf(outputType.toUpperCase() as FormatVariants) === -1
     ) {
       return new Response(`Output type ${outputType} not supported`, {
         status: 400,
@@ -104,7 +105,7 @@ export default defineRoute(async (_req, ctx) => {
   const title = `${inputType} to ${outputType}`;
 
   if (
-    supportedFormatTypes[fileType].indexOf(outputType.toUpperCase()) === -1
+    supportedFormatTypes[fileType].indexOf(outputType.toUpperCase() as FormatVariants) === -1
   ) {
     return await ctx.renderNotFound();
   }

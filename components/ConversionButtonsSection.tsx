@@ -8,9 +8,8 @@ export type FormatVariants =
   | "YAML"
   | "JSONL"
   | "CSV"
-  | "XLSX"
   | "TOML"
-  | "HTML";
+  | "BEAUTIFIER"; // not a format but it's ok
 
 type ButtonsSection = PropsWithOptionalChildren<{
   title: string;

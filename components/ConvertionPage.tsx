@@ -1,4 +1,3 @@
-import { PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import FileInput from "../islands/FileInput.tsx";
 import NavBar from "../islands/Navbar.tsx";

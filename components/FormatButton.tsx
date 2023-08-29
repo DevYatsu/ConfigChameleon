@@ -15,7 +15,7 @@ export default function FormatButton({ text, variant, href }: FormatButton) {
     ? "blue-500"
     : variant == "JSONL"
     ? "indigo-500"
-    : variant == "XLSX"
+    : variant == "BEAUTIFIER"
     ? "yellow-500"
     : variant == "YAML"
     ? "gray-500"

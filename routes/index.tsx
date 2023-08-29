@@ -1,9 +1,9 @@
-import Button from "../components/FormatButton.tsx";
 import { ComponentChildren } from "preact";
 import NavBar from "../islands/Navbar.tsx";
 import { PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import ConversionButtonsSection from "../components/ConversionButtonsSection.tsx";
+import supportedFormatTypes from "../utils/supportedFormatTypes.ts";
 export type PropsWithChildren<T> = { children: ComponentChildren } & T;
 export type PropsWithOptionalChildren<T> = { children?: ComponentChildren } & T;
 
@@ -28,19 +28,19 @@ export default function Home({ route }: PageProps) {
         <div class="h-full w-full grid grid-cols-1 sm:gap-y-6 sm:grid-cols-2 lg:grid-cols-4 container">
           <ConversionButtonsSection
             title="JSON"
-            outputs={["YAML", "XML", "JSONL", "CSV"]}
+            outputs={supportedFormatTypes.json}
           />
           <ConversionButtonsSection
             title="YAML"
-            outputs={["JSON", "XML", "TOML", "CSV"]}
+            outputs={supportedFormatTypes.yaml}
           />
           <ConversionButtonsSection
             title="CSV"
-            outputs={["JSON", "XLSX", "XML", "HTML"]}
+            outputs={supportedFormatTypes.csv}
           />
           <ConversionButtonsSection
             title="XML"
-            outputs={["CSV", "YAML", "JSON", "HTML"]}
+            outputs={supportedFormatTypes.xml}
           />
         </div>
       </div>

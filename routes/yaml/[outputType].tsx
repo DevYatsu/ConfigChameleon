@@ -5,12 +5,21 @@ import { parse as parseYaml } from "npm:yaml";
 import { generateFile } from "../../utils/file.ts";
 import { JsonToCSV, JsonToToml, JsonToXml } from "../../utils/json.ts";
 import supportedFormatTypes from "../../utils/supportedFormatTypes.ts";
+import { FormatVariants } from "../../components/ConversionButtonsSection.tsx";
 
 const fileType = "yaml";
 
 export const handler: Handlers<File> = {
   async POST(req, ctx) {
     const outputType: string = ctx.params.outputType;
+
+    if (
+      supportedFormatTypes[fileType].indexOf(outputType.toUpperCase() as FormatVariants) === -1
+    ) {
+      return new Response(`Output type ${outputType} not supported`, {
+        status: 400,
+      });
+    }
 
     try {
       const file = await retrieveRequestFile(req, fileType);
@@ -26,10 +35,10 @@ export const handler: Handlers<File> = {
       const arrayBuffer = await file.arrayBuffer();
       const uint8Array = new Uint8Array(arrayBuffer);
       const textDecoder = new TextDecoder("utf-8");
-      const jsonContent = textDecoder.decode(uint8Array);
+      const yamlContent = textDecoder.decode(uint8Array);
 
       try {
-        const jsonObj = parseYaml(jsonContent);
+        const jsonObj = parseYaml(yamlContent);
 
         switch (outputType) {
           case "json": {
@@ -99,7 +108,9 @@ export default defineRoute(async (_req, ctx) => {
   const title = `${inputType} to ${outputType}`;
 
   if (
-    supportedFormatTypes[fileType].indexOf(outputType.toUpperCase()) === -1
+    supportedFormatTypes[fileType].indexOf(
+      outputType.toUpperCase() as FormatVariants,
+    ) === -1
   ) {
     return await ctx.renderNotFound();
   }
