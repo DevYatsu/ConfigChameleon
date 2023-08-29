@@ -1,9 +1,9 @@
-import { Handlers, PageProps, RouteContext } from "$fresh/server.ts";
+import { defineRoute, Handlers } from "$fresh/server.ts";
 import ConvertionPage from "../../components/ConvertionPage.tsx";
 import { retrieveRequestFile } from "../../utils/retrieveRequestFile.ts";
 import { parse as parseYaml } from "npm:yaml";
 import { generateFile } from "../../utils/file.ts";
-import { JsonToCSV, JsonToHTML, JsonToXml } from "../../utils/json.ts";
+import { JsonToCSV, JsonToToml, JsonToXml } from "../../utils/json.ts";
 import supportedFormatTypes from "../../utils/supportedFormatTypes.ts";
 
 const fileType = "yaml";
@@ -39,17 +39,17 @@ export const handler: Handlers<File> = {
             );
             return new Response(file);
           }
-          case "html": {
+          case "toml": {
             try {
-              const htmlContent = JsonToHTML(jsonObj);
+              const htmlContent = JsonToToml(jsonObj);
               const file = generateFile(
                 JSON.stringify(htmlContent),
-                "application/html",
+                "application/toml",
               );
               return new Response(file);
             } catch (error) {
               return new Response(
-                "Yaml to HTML conversion requires specific yaml file content!",
+                "Yaml to TOML conversion requires specific yaml file content!",
                 { status: 400 },
               );
             }
@@ -93,7 +93,7 @@ export const handler: Handlers<File> = {
   },
 };
 
-export default async function Page(req: Request, ctx: RouteContext) {
+export default defineRoute(async (_req, ctx) => {
   const inputType = ctx.route.split("/")[1];
   const outputType = ctx.params.outputType;
   const title = `${inputType} to ${outputType}`;
@@ -103,12 +103,12 @@ export default async function Page(req: Request, ctx: RouteContext) {
   ) {
     return await ctx.renderNotFound();
   }
+
   return (
     <ConvertionPage
       title={title}
       inputType={inputType}
       outputType={outputType}
-      {...ctx}
     />
   );
-}
+});

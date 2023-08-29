@@ -8,7 +8,7 @@ type ConvertionPageProps = {
   title: string;
   inputType: string;
   outputType: string;
-} & PageProps;
+};
 
 export default function ConvertionPage(
   { title, inputType, outputType }: ConvertionPageProps,

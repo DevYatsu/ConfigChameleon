@@ -1,4 +1,4 @@
-import { Handlers, PageProps, RouteContext } from "$fresh/server.ts";
+import { Handlers, PageProps, RouteContext, defineRoute } from "$fresh/server.ts";
 import ConvertionPage from "../../components/ConvertionPage.tsx";
 import { retrieveRequestFile } from "../../utils/retrieveRequestFile.ts";
 import supportedFormatTypes from "../../utils/supportedFormatTypes.ts";
@@ -19,7 +19,7 @@ export const handler: Handlers<File> = {
   },
 };
 
-export default async function Page(req: Request, ctx: RouteContext) {
+export default defineRoute(async (_req, ctx) => {
   const inputType = ctx.route.split("/")[1];
   const outputType = ctx.params.outputType;
   const title = `${inputType} to ${outputType}`;
@@ -29,12 +29,12 @@ export default async function Page(req: Request, ctx: RouteContext) {
   ) {
     return await ctx.renderNotFound();
   }
+
   return (
     <ConvertionPage
       title={title}
       inputType={inputType}
       outputType={outputType}
-      {...ctx}
     />
   );
-}
+});

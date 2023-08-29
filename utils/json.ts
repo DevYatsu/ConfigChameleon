@@ -2,12 +2,16 @@ import { js2xml } from "js2xml";
 import { stringify as stringifyYaml } from "npm:yaml";
 import JsonCSV from "npm:papaparse@5.0.2";
 import { JsonDBO, jsonToHTML } from "npm:markuptojson";
+import { stringify as stringifyToml } from "$std/toml/stringify.ts";
 
 export function JsonToXml(obj: Record<string, unknown>): string {
   return js2xml(obj, {
     compact: true,
     spaces: 4,
   });
+}
+export function JsonToToml(obj: Record<string, unknown>): string {
+  return stringifyToml(obj);
 }
 export function JsonToYaml(obj: Record<string, unknown>): string {
   return stringifyYaml(obj);

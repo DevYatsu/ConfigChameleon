@@ -9,7 +9,7 @@ export type FormatButton = {
 export default function FormatButton({ text, variant, href }: FormatButton) {
   const accentColor = variant == "JSON"
     ? "green-500"
-    : variant == "HTML"
+    : variant == "TOML"
     ? "red-500"
     : variant == "XML"
     ? "blue-500"

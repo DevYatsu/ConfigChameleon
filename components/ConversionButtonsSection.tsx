@@ -4,12 +4,13 @@ import FormatButton from "./FormatButton.tsx";
 
 export type FormatVariants =
   | "XML"
-  | "HTML"
   | "JSON"
   | "YAML"
   | "JSONL"
   | "CSV"
-  | "XLSX";
+  | "XLSX"
+  | "TOML"
+  | "HTML";
 
 type ButtonsSection = PropsWithOptionalChildren<{
   title: string;
