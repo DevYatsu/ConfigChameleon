@@ -27,7 +27,6 @@ export const handler: Handlers<File> = {
       const uint8Array = new Uint8Array(arrayBuffer);
       const textDecoder = new TextDecoder("utf-8");
       const jsonContent = textDecoder.decode(uint8Array);
-      console.log("working");
 
       try {
         const jsonObj = parseYaml(jsonContent);
@@ -43,14 +42,17 @@ export const handler: Handlers<File> = {
           case "html": {
             try {
               const htmlContent = JsonToHTML(jsonObj);
-              // todo!
+              const file = generateFile(
+                JSON.stringify(htmlContent),
+                "application/html",
+              );
+              return new Response(file);
             } catch (error) {
               return new Response(
                 "Yaml to HTML conversion requires specific yaml file content!",
                 { status: 400 },
               );
             }
-            break;
           }
           case "csv": {
             if (jsonObj instanceof Array) {
@@ -62,7 +64,7 @@ export const handler: Handlers<File> = {
               return new Response(file);
             } else {
               return new Response(
-                "Json to Csv conversion requires specific json file content!",
+                "Yaml to Csv conversion requires specific json file content!",
                 { status: 400 },
               );
             }

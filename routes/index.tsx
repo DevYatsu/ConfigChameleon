@@ -32,7 +32,7 @@ export default function Home({ route }: PageProps) {
           />
           <ConversionButtonsSection
             title="YAML"
-            outputs={["CSV", "JSON", "XML", "HTML"]}
+            outputs={["JSON", "XML", "HTML", "CSV"]}
           />
           <ConversionButtonsSection
             title="CSV"

@@ -9,7 +9,6 @@ import {
   JsonToYaml,
 } from "../../utils/json.ts";
 import supportedFormatTypes from "../../utils/supportedFormatTypes.ts";
-import Error404 from "../_404.tsx";
 
 const fileType = "json";
 
@@ -41,6 +40,7 @@ export const handler: Handlers<File> = {
       const textDecoder = new TextDecoder("utf-8");
       const jsonContent = textDecoder.decode(uint8Array);
       const jsonObj = JSON.parse(jsonContent);
+      console.log(jsonObj);
 
       if (typeof jsonObj !== "object") {
         return new Response("Invalid json format", { status: 422 });
@@ -56,7 +56,7 @@ export const handler: Handlers<File> = {
           return new Response(file);
         }
         case "yaml": {
-          const yamlContent = JsonToYaml(jsonObj); // todo!
+          const yamlContent = JsonToYaml(jsonObj); 
           const file: File = generateFile(
             yamlContent,
             "application/yaml",
