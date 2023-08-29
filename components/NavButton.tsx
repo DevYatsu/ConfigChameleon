@@ -1,4 +1,4 @@
-export default function B(
+export default function Button(
   { onClick, isOpen }: { onClick: () => void; isOpen: boolean },
 ) {
   const svg = !isOpen

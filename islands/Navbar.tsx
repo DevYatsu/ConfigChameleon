@@ -1,7 +1,9 @@
 import { twMerge } from "npm:tailwind-merge";
 import NavButton from "../components/NavButton.tsx";
-import { useEffect, useState } from "preact/hooks";
+import { useEffect } from "preact/hooks";
 import NavLink from "../components/NavLink.tsx";
+import { signal } from "@preact/signals";
+import { batch, computed, effect } from "@preact/signals-core";
 
 const navLinks = [
   { link: "/", name: "Home" },
@@ -10,28 +12,20 @@ const navLinks = [
   { link: "https://github.com/DevYatsu", name: "My Github", target: "_blank" },
 ];
 
+const isOpen = signal(false);
+const windowWidth = signal(window.innerWidth);
+const isBigScreen = computed(() => windowWidth.value > 640);
+
 export default function NavBar(
   { route, cls }: { route?: string; cls?: string },
 ) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isBigScreen, setIsBigScreen] = useState(
-    window.innerWidth > 640,
-  );
-
   function onClick() {
-    setIsOpen((old) => !old);
+    isOpen.value = !isOpen.value;
   }
 
   useEffect(() => {
     const handleResize = () => {
-      const windowWidth = window.innerWidth;
-      if (windowWidth > 640) {
-        setIsOpen(true);
-        setIsBigScreen(true);
-      } else {
-        setIsBigScreen(false);
-        setIsOpen(false);
-      }
+      windowWidth.value = window.innerWidth;
     };
 
     globalThis.addEventListener("resize", handleResize);
@@ -55,7 +49,9 @@ export default function NavBar(
           return (
             <NavLink
               {...el}
-              cls={`pb-1 ${!isBigScreen && !isOpen ? "hidden" : ""}`}
+              cls={`pb-1 ${
+                !isBigScreen.value && !isOpen.value ? "hidden" : ""
+              }`}
               currentPage={route === el.link}
             />
           );
@@ -64,13 +60,15 @@ export default function NavBar(
           return (
             <NavLink
               {...el}
-              cls={`sm:hidden ${(!isBigScreen && isOpen) ? "hidden" : ""}`}
+              cls={`sm:hidden ${
+                (!isBigScreen.value && isOpen.value) ? "hidden" : ""
+              }`}
               currentPage={route === el.link}
             />
           );
         })}
         <div class="sm:hidden absolute right-4 top-2">
-          <NavButton onClick={onClick} isOpen={isOpen} />
+          <NavButton onClick={onClick} isOpen={isOpen.value} />
         </div>
       </ul>
     </nav>

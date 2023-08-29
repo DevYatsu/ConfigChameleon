@@ -3,12 +3,14 @@ import { Head } from "$fresh/runtime.ts";
 import { ErrorToast } from "../utils/Toast.ts";
 import { fetchDataAndDownloadFile, isFileSizeTooLarge } from "../utils/file.ts";
 import Loader from "../components/Loader.tsx";
+import { signal } from "@preact/signals";
+
+const isLoading = signal(false);
 
 export default function FileInput(
   { filetype, outputType }: { filetype: string; outputType: string },
 ) {
   const [initialFile, setInitialFile] = useState<File | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = (e: any) => {
     if (!e?.target?.files[0]) {
@@ -30,7 +32,7 @@ export default function FileInput(
 
   useEffect(() => {
     if (initialFile) {
-      setIsLoading(true);
+      isLoading.value = true;
       DownloadFile();
     }
     async function DownloadFile() {
@@ -43,7 +45,7 @@ export default function FileInput(
       } catch (error) {
         console.log(error);
       } finally {
-        setIsLoading(false);
+        isLoading.value = false;
       }
     }
   }, [initialFile]);
@@ -59,7 +61,7 @@ export default function FileInput(
         <link rel="stylesheet" href="/index.css" />
       </Head>
       <div class="flex justify-center py-8 px-5 h-full">
-        {isLoading
+        {isLoading.value
           ? (
             <div class="pt-52">
               <Loader />

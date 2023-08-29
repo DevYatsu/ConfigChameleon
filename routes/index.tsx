@@ -19,7 +19,7 @@ export default function Home({ route }: PageProps) {
         <h1 class="text-slate-900 font-extrabold font-pacifico text-4xl sm:text-4xl lg:text-5xl tracking-widest z-10 text-center xl:text-left relative px-5 pt-12 xl:pl-40">
           Convert files
         </h1>
-        <div class="font-tilt-prism text-2xl text-center sm:absolute -bottom-7 left-1/2 xl:left-48 text-gray-400 select-none -z-10">
+        <div class="font-secondary text-2xl text-center sm:absolute -bottom-7 left-1/2 xl:left-48 text-gray-400 select-none -z-10">
           Up to 10 mb
         </div>
       </div>

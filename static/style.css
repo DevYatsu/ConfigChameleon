@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Tilt+Prism&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display&display=swap');
 
 .font-pacifico {
     font-family: "Pacifico"
 }
-.font-tilt-prism {
-    font-family: "Tilt Prism"
+.font-secondary {
+    font-family: "Sedgwick Ave Display"
 }
