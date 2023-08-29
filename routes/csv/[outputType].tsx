@@ -1,5 +1,4 @@
 import { defineRoute, Handlers } from "$fresh/server.ts";
-import { FormatVariants } from "../../components/ConversionButtonsSection.tsx";
 import ConvertionPage from "../../components/ConvertionPage.tsx";
 import { retrieveRequestFile } from "../../utils/retrieveRequestFile.ts";
 import supportedFormatTypes from "../../utils/supportedFormatTypes.ts";
