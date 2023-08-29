@@ -20,7 +20,7 @@ export default function NavLink(
               href={link}
               target={target ? target : ""}
               aria-current="page"
-              class="text-blue-400"
+              class="text-indigo-400"
             >
               {name}
             </a>
@@ -31,6 +31,7 @@ export default function NavLink(
             <a
               href={link}
               target={target ? target : ""}
+              class=" hover:text-indigo-700 dark:hover:text-indigo-200 transition duration-300"
             >
               {name}
             </a>

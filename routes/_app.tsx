@@ -8,7 +8,7 @@ export default function App({ Component }: AppProps) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body class="h-full min-h-screen bg-indigo-300 dark:bg-gray-900 text-white ">
+      <body class="h-full min-h-screen bg-white dark:bg-gray-900 dark:text-white ">
         <Component />
       </body>
     </html>

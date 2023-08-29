@@ -3,7 +3,7 @@ import NavBar from "../../islands/Navbar.tsx";
 
 export default function Greet(props: PageProps) {
   return (
-    <div class="h-screen grid items-center bg-gray-900 text-white">
+    <div class="h-screen grid items-center dark:text-white">
       <NavBar cls="absolute top-0" />
       <span class="text(center 3xl)">
         Hello{" "}

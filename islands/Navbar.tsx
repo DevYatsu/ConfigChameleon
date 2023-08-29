@@ -44,7 +44,7 @@ export default function NavBar(
   return (
     <nav
       class={twMerge(
-        "w-full min-h-12 text-white bg-indigo-900 flex sm:justify-center",
+        "w-full min-h-12 dark:text-white bg-[#e5fcf5] dark:bg-indigo-900 flex sm:justify-center",
         ` ${cls ? cls : ""}`,
       )}
     >

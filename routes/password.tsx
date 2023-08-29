@@ -49,7 +49,7 @@ export default function PasswordPage({ data, route }: PageProps) {
         <h1 class="px-5 text-2xl text-red-500 md:text-3xl">
           Random Password:
         </h1>
-        <p class="text-2xl font-bold leading-7 text-white sm:truncate sm:text-3xl sm:tracking-tight ">
+        <p class="text-2xl font-bold leading-7 dark:text-white sm:truncate sm:text-3xl sm:tracking-tight ">
           {data}
         </p>
       </div>

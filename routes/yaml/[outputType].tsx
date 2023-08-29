@@ -5,7 +5,6 @@ import { parse as parseYaml } from "npm:yaml";
 import { generateFile } from "../../utils/file.ts";
 import { JsonToCSV, JsonToToml, JsonToXml } from "../../utils/json.ts";
 import supportedFormatTypes from "../../utils/supportedFormatTypes.ts";
-import { FormatVariants } from "../../components/ConversionButtonsSection.tsx";
 
 const fileType = "yaml";
 
@@ -110,8 +109,8 @@ export default defineRoute(async (_req, ctx) => {
   const title = `${inputType} to ${outputType}`;
 
   if (
-    supportedFormatTypes[fileType].indexOf(
-      outputType.toUpperCase() as FormatVariants,
+    (supportedFormatTypes[fileType] as string[]).indexOf(
+      outputType.toUpperCase(),
     ) === -1
   ) {
     return await ctx.renderNotFound();

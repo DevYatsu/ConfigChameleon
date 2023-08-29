@@ -6,7 +6,6 @@ import { xml2js } from "$modules/xml2js@1.0.0/mod.ts";
 import { generateFile } from "../../utils/file.ts";
 import { JsonToCSV, JsonToYaml } from "../../utils/json.ts";
 import xmlButPrettier from "npm:xml-but-prettier";
-import { FormatVariants } from "../../components/ConversionButtonsSection.tsx";
 
 const fileType = "xml";
 
@@ -105,8 +104,8 @@ export default defineRoute(async (_req, ctx) => {
   const title = `${inputType} to ${outputType}`;
 
   if (
-    supportedFormatTypes[fileType].indexOf(
-      outputType.toUpperCase() as FormatVariants,
+    (supportedFormatTypes[fileType] as string[]).indexOf(
+      outputType.toUpperCase(),
     ) === -1
   ) {
     return await ctx.renderNotFound();

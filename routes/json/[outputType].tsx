@@ -9,7 +9,6 @@ import {
   JsonToYaml,
 } from "../../utils/json.ts";
 import supportedFormatTypes from "../../utils/supportedFormatTypes.ts";
-import { FormatVariants } from "../../components/ConversionButtonsSection.tsx";
 
 const fileType = "json";
 
