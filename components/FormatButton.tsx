@@ -23,7 +23,7 @@ export default function FormatButton({ text, variant, href }: FormatButton) {
   return (
     <a
       href={href}
-      class="min-w-[200px] w-50 select-none relative inline-flex items-center justify-center px-18 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 dark:bg-gray-600 rounded-lg group"
+      class="min-w-[200px] w-50 select-none relative inline-flex items-center justify-center px-18 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 dark:bg-slate-900 rounded-lg group"
     >
       <span
         class={`absolute w-0 h-0 transition-all duration-500 ease-out bg-${accentColor} rounded-full group-hover:w-56 group-hover:h-56`}
