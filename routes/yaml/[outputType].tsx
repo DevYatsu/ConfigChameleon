@@ -14,7 +14,9 @@ export const handler: Handlers<File> = {
     const outputType: string = ctx.params.outputType;
 
     if (
-      supportedFormatTypes[fileType].indexOf(outputType.toUpperCase() as FormatVariants) === -1
+      (supportedFormatTypes[fileType] as string[]).indexOf(
+        outputType.toUpperCase(),
+      ) === -1
     ) {
       return new Response(`Output type ${outputType} not supported`, {
         status: 400,

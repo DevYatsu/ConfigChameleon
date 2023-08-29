@@ -1,7 +1,4 @@
-import {
-  defineRoute,
-  Handlers
-} from "$fresh/server.ts";
+import { defineRoute, Handlers } from "$fresh/server.ts";
 import { FormatVariants } from "../../components/ConversionButtonsSection.tsx";
 import ConvertionPage from "../../components/ConvertionPage.tsx";
 import { retrieveRequestFile } from "../../utils/retrieveRequestFile.ts";
@@ -13,14 +10,15 @@ export const handler: Handlers<File> = {
     const outputType: string = ctx.params.outputType;
 
     if (
-      supportedFormatTypes[fileType].indexOf(
-        outputType.toUpperCase() as FormatVariants,
-      ) === -1
-    ) {
+    (supportedFormatTypes[fileType] as string[]).indexOf(
+      outputType.toUpperCase(),
+    ) === -1
+  ) {
       return new Response(`Output type ${outputType} not supported`, {
         status: 400,
       });
     }
+
     const file = await retrieveRequestFile(req, fileType);
 
     if (!file) {
@@ -40,8 +38,8 @@ export default defineRoute(async (_req, ctx) => {
   const title = `${inputType} to ${outputType}`;
 
   if (
-    supportedFormatTypes[fileType].indexOf(
-      outputType.toUpperCase() as FormatVariants,
+    (supportedFormatTypes[fileType] as string[]).indexOf(
+      outputType.toUpperCase(),
     ) === -1
   ) {
     return await ctx.renderNotFound();
