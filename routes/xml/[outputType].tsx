@@ -1,4 +1,4 @@
-import { Handlers, PageProps } from "$fresh/server.ts";
+import { Handlers, PageProps, RouteContext } from "$fresh/server.ts";
 import ConvertionPage from "../../components/ConvertionPage.tsx";
 import { retrieveRequestFile } from "../../utils/retrieveRequestFile.ts";
 import supportedFormatTypes from "../../utils/supportedFormatTypes.ts";
@@ -17,30 +17,24 @@ export const handler: Handlers<File> = {
     // file is file
     return new Response(null);
   },
-  GET(req, ctx) {
-    const outputType: string = ctx.params.outputType;
-    console.log(req);
-    if (
-      supportedFormatTypes[fileType].indexOf(outputType.toUpperCase()) === -1
-    ) {
-      return ctx.renderNotFound();
-    }
-
-    return ctx.render();
-  },
 };
 
-export default function Page(props: PageProps) {
-  const inputType = props.route.split("/")[1];
-  const outputType = props.params.outputType;
+export default async function Page(req: Request, ctx: RouteContext) {
+  const inputType = ctx.route.split("/")[1];
+  const outputType = ctx.params.outputType;
   const title = `${inputType} to ${outputType}`;
 
+  if (
+    supportedFormatTypes[fileType].indexOf(outputType.toUpperCase()) === -1
+  ) {
+    return await ctx.renderNotFound();
+  }
   return (
     <ConvertionPage
       title={title}
       inputType={inputType}
       outputType={outputType}
-      {...props}
+      {...ctx}
     />
   );
 }
