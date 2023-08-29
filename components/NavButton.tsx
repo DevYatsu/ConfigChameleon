@@ -1,7 +1,7 @@
 export default function B(
-  { onClick, isHidden }: { onClick: () => void; isHidden: boolean },
+  { onClick, isOpen }: { onClick: () => void; isOpen: boolean },
 ) {
-  const svg = isHidden
+  const svg = !isOpen
     ? (
       <svg
         class="bg-none outline-none ring-none border-none"

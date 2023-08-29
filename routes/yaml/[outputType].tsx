@@ -106,13 +106,7 @@ export const handler: Handlers<File> = {
 export default function Page(props: PageProps) {
   const inputType = props.route.split("/")[1];
   const outputType = props.params.outputType;
-  const title = `${inputType} to ${outputType}`.split(" ").map((
-    w,
-  ) =>
-    w.split("").map((letter, i) => i == 0 ? letter.toUpperCase() : letter).join(
-      "",
-    )
-  ).join(" ");
+  const title = `${inputType} to ${outputType}`;
 
   return (
     <ConvertionPage

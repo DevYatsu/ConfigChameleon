@@ -61,7 +61,7 @@ export default function FileInput(
       <div class="flex justify-center py-8 px-5 h-full">
         {isLoading
           ? (
-            <div class="pt-72">
+            <div class="pt-52">
               <Loader />
             </div>
           )
