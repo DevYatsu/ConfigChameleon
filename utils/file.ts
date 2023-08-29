@@ -11,6 +11,10 @@ export const fetchDataAndDownloadFile = async (
 
     const url = `/${filetype}/${outputType}`;
 
+    if (outputType.toLowerCase() === "beautifier") {
+      outputType = filetype;
+    }
+
     try {
       const response = await fetch(url, { method: "POST", body: formData });
 
