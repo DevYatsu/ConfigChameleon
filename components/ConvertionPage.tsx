@@ -24,7 +24,7 @@ export default function ConvertionPage(
         />
       </Head>
       <NavBar cls="absolute top-0" />
-      <div class="h-full min-h-screen dark:text-white text-center py-8 px-3 flex flex-col items-center justify-center">
+      <div class="h-full min-h-screen text-black dark:text-white text-center py-8 px-3 flex flex-col items-center justify-center">
         <h2 class="font-bold text-3xl tracking-tight sm:text-4xl">
           {titleCase(title)}
         </h2>

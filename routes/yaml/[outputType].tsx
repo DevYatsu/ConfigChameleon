@@ -4,7 +4,7 @@ import { retrieveRequestFile } from "../../utils/retrieveRequestFile.ts";
 import { parse as parseYaml } from "npm:yaml";
 import { generateFile } from "../../utils/file.ts";
 import { JsonToCSV, JsonToToml, JsonToXml } from "../../utils/json.ts";
-import supportedFormatTypes from "../../utils/supportedFormatTypes.ts";
+import { supportedFormatTypes } from "../../utils/supportedFormatTypes.ts";
 
 const fileType = "yaml";
 

@@ -6,7 +6,11 @@ export default function App({ Component }: AppProps) {
     if (!csp.directives.imgSrc) {
       csp.directives.imgSrc = [];
     }
+    if (!csp.directives.fontSrc) {
+      csp.directives.fontSrc = [];
+    }
     csp.directives.imgSrc.push("http://localhost:8000/images/");
+    csp.directives.fontSrc.push("https://fonts.gstatic.com/");
   });
 
   return (
@@ -25,12 +29,13 @@ export default function App({ Component }: AppProps) {
           href={asset("http://localhost:8000/images/favicon.ico")}
           type="image/x-icon"
         />
+        <link rel="preconnect" href={asset("https://fonts.gstatic.com/")} />
         <link rel="preconnect" href={asset("http://localhost:8000/fonts/")} />
         <link rel="preconnect" href={asset("http://localhost:8000/css/")} />
 
         <meta http-equiv="Content-Security-Policy" content="base-uri 'self'" />
       </head>
-      <body class="h-full min-h-screen bg-white dark:bg-gray-900 dark:text-white ">
+      <body class="h-full min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white ">
         <Component />
       </body>
     </html>

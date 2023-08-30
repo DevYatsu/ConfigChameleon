@@ -8,7 +8,7 @@ import {
   JsonToXml,
   JsonToYaml,
 } from "../../utils/json.ts";
-import supportedFormatTypes from "../../utils/supportedFormatTypes.ts";
+import {supportedFormatTypes} from "../../utils/supportedFormatTypes.ts";
 
 const fileType = "json";
 

@@ -1,7 +1,7 @@
 import { defineRoute, Handlers } from "$fresh/server.ts";
 import ConvertionPage from "../../components/ConvertionPage.tsx";
 import { retrieveRequestFile } from "../../utils/retrieveRequestFile.ts";
-import supportedFormatTypes from "../../utils/supportedFormatTypes.ts";
+import {supportedFormatTypes} from "../../utils/supportedFormatTypes.ts";
 
 const fileType = "csv";
 export const handler: Handlers<File> = {

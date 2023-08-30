@@ -1,7 +1,7 @@
 import { defineRoute, Handlers } from "$fresh/server.ts";
 import ConvertionPage from "../../components/ConvertionPage.tsx";
 import { retrieveRequestFile } from "../../utils/retrieveRequestFile.ts";
-import supportedFormatTypes from "../../utils/supportedFormatTypes.ts";
+import { supportedFormatTypes } from "../../utils/supportedFormatTypes.ts";
 import { xml2js } from "$modules/xml2js@1.0.0/mod.ts";
 import { generateFile } from "../../utils/file.ts";
 import { JsonToCSV, JsonToYaml } from "../../utils/json.ts";
