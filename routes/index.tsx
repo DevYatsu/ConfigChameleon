@@ -1,18 +1,32 @@
 import { ComponentChildren } from "preact";
 import NavBar from "../islands/Navbar.tsx";
-import { PageProps } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
+import { PageProps, RouteConfig } from "$fresh/server.ts";
+import { asset, Head, useCSP } from "$fresh/runtime.ts";
 import ConversionButtonsSection from "../components/ConversionButtonsSection.tsx";
 import supportedFormatTypes from "../utils/supportedFormatTypes.ts";
 export type PropsWithChildren<T> = { children: ComponentChildren } & T;
 export type PropsWithOptionalChildren<T> = { children?: ComponentChildren } & T;
 
 export default function Home({ route }: PageProps) {
+  useCSP((csp) => {
+    if (!csp.directives.styleSrc) {
+      csp.directives.styleSrc = [];
+    }
+    csp.directives.styleSrc.push("http://localhost:8000/style.css");
+    csp.directives.fontSrc = [
+      "http://localhost:8000/fonts/",
+      "http://localhost:8000/icon/",
+    ];
+    csp.directives.scriptSrc = ["http://localhost:8000/_frsh/js/"];
+  });
+
   return (
     <>
       <Head>
         <title>Home | Convert And Minify</title>
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href={asset("style.css")} />
+        <link rel="preconnect" href="https://testfonts.com" />
+        <link rel="preconnect" href="https://testfonts.com/fonts/" />
       </Head>
       <NavBar route={route} />
       <div class="relative w-full z-20">
@@ -53,3 +67,7 @@ export default function Home({ route }: PageProps) {
     </>
   );
 }
+
+export const config: RouteConfig = {
+  csp: true,
+};

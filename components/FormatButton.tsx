@@ -23,6 +23,7 @@ export default function FormatButton({ text, variant, href }: FormatButton) {
   return (
     <a
       href={href}
+      aria-label={`${text} conversion`}
       class="min-w-[200px] w-50 select-none relative inline-flex items-center justify-center px-18 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 dark:bg-slate-900 rounded-lg group"
     >
       <span

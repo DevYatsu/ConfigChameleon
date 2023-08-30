@@ -1,9 +1,10 @@
 import { useEffect, useState } from "preact/hooks";
-import { Head } from "$fresh/runtime.ts";
+import { Head, useCSP, asset } from '$fresh/runtime.ts';
 import { ErrorToast } from "../utils/Toast.ts";
 import { fetchDataAndDownloadFile, isFileSizeTooLarge } from "../utils/file.ts";
 import Loader from "../components/Loader.tsx";
 import { signal } from "@preact/signals";
+import { RouteConfig } from "$modules/fresh@1.4.2/server.ts";
 
 const isLoading = signal(false);
 
@@ -50,6 +51,18 @@ export default function FileInput(
     }
   }, [initialFile]);
 
+  useCSP((csp) => {
+    if (!csp.directives.styleSrc) {
+      csp.directives.styleSrc = [];
+    }
+    csp.directives.styleSrc.push(
+      "https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css",
+    );
+    csp.directives.styleSrc.push(
+      "https://localhost:8000/index.css",
+    );
+  });
+
   return (
     <>
       <Head>
@@ -58,7 +71,7 @@ export default function FileInput(
           type="text/css"
           href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
         />
-        <link rel="stylesheet" href="/index.css" />
+        <link rel="stylesheet" href={asset("/index.css")} />
       </Head>
       <div class="flex justify-center py-8 px-5 h-full">
         {isLoading.value
@@ -105,3 +118,7 @@ function Input(
     </div>
   );
 }
+
+export const config: RouteConfig = {
+  csp: true,
+};

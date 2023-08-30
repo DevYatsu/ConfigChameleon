@@ -67,9 +67,9 @@ export default function NavBar(
             />
           );
         })}
-        <div class="sm:hidden absolute right-4 top-2">
+        <li class="sm:hidden absolute right-4 top-2">
           <NavButton onClick={onClick} isOpen={isOpen.value} />
-        </div>
+        </li>
       </ul>
     </nav>
   );

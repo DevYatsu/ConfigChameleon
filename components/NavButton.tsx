@@ -73,6 +73,7 @@ export default function Button(
     <button
       class="rounded-lg p-1 hover:duration-500 hover:bg-indigo-400 outline-none ring-none border-none"
       onClick={onClick}
+      aria-label={`${isOpen ? "close-links" : "extend-links"}`}
     >
       {svg}
     </button>
