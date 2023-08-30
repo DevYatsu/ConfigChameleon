@@ -1,32 +1,7 @@
-function generateComplexPassword() {
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-  const numbers = "0123456789";
-
-  const allChars = chars + numbers;
-
-  function getRandomCharacter() {
-    const randomIndex = Math.floor(Math.random() * allChars.length);
-    return allChars.charAt(randomIndex);
-  }
-
-  let password = "";
-
-  for (let i = 0; i < 4; i++) {
-    for (let j = 0; j < 4; j++) {
-      const randomChar = getRandomCharacter();
-      password += randomChar;
-    }
-    if (i !== 3) {
-      password += "-";
-    }
-  }
-
-  return password;
-}
-
-import { Handlers, PageProps } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
+import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
+import { Head, useCSP } from "$fresh/runtime.ts";
 import NavBar from "../islands/Navbar.tsx";
+import generateComplexPassword from "../utils/password.ts";
 
 export const handler: Handlers = {
   GET(_req, ctx) {
@@ -35,6 +10,13 @@ export const handler: Handlers = {
 };
 
 export default function PasswordPage({ data, route }: PageProps) {
+  useCSP((csp) => {
+    if (!csp.directives.scriptSrc) {
+      csp.directives.scriptSrc = [];
+    }
+    csp.directives.scriptSrc.push("http://localhost:8000/_frsh/js/");
+  });
+
   return (
     <>
       <Head>
@@ -68,3 +50,6 @@ export default function PasswordPage({ data, route }: PageProps) {
     </>
   );
 }
+export const config: RouteConfig = {
+  csp: true,
+};

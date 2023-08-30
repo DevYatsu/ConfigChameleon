@@ -1,4 +1,4 @@
-import { PageProps } from "$fresh/server.ts";
+import { PageProps, RouteConfig } from "$fresh/server.ts";
 import NavBar from "../../islands/Navbar.tsx";
 
 export default function Greet(props: PageProps) {
@@ -22,3 +22,6 @@ export default function Greet(props: PageProps) {
     </div>
   );
 }
+export const config: RouteConfig = {
+  csp: true,
+};

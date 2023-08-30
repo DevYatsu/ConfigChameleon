@@ -3,7 +3,7 @@ import NavButton from "../components/NavButton.tsx";
 import { useEffect } from "preact/hooks";
 import NavLink from "../components/NavLink.tsx";
 import { signal } from "@preact/signals";
-import { batch, computed, effect } from "@preact/signals-core";
+import { computed } from "@preact/signals-core";
 
 const navLinks = [
   { link: "/", name: "Home", accesskey: "homepage" },
@@ -57,7 +57,6 @@ export default function NavBar(
               cls={`pb-1 ${
                 !isBigScreen.value && !isOpen.value ? "hidden" : ""
               }`}
-              ariaHidden={!isBigScreen.value && !isOpen.value}
               currentPage={route === el.link}
             />
           );
@@ -69,7 +68,6 @@ export default function NavBar(
               cls={`sm:hidden ${
                 (!isBigScreen.value && isOpen.value) ? "hidden" : ""
               }`}
-              ariaHidden={!isBigScreen.value && isOpen.value}
               currentPage={route === el.link}
             />
           );

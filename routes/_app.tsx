@@ -31,6 +31,8 @@ export default function App({ Component }: AppProps) {
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="ConfigChameleon" />
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <meta http-equiv="Content-Security-Policy" content="base-uri 'self'" />
+        <base href="http://localhost:8000/" />
 
         <meta name="theme-color" content="#3730A3" />
         <link rel="manifest" href="/manifest.json" />
