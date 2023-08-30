@@ -7,12 +7,11 @@ import { signal } from "@preact/signals";
 import { RouteConfig } from "$modules/fresh@1.4.2/server.ts";
 
 const isLoading = signal(false);
+const initialFile = signal<File | null>(null);
 
 export default function FileInput(
   { filetype, outputType }: { filetype: string; outputType: string },
 ) {
-  const [initialFile, setInitialFile] = useState<File | null>(null);
-
   const handleFileChange = (e: any) => {
     if (!e?.target?.files[0]) {
       return;
@@ -27,19 +26,19 @@ export default function FileInput(
       return;
     }
     if (file) {
-      setInitialFile(file);
+      initialFile.value = file;
     }
   };
 
   useEffect(() => {
-    if (initialFile) {
+    if (initialFile.value) {
       isLoading.value = true;
       DownloadFile();
     }
     async function DownloadFile() {
       try {
         await fetchDataAndDownloadFile(
-          initialFile,
+          initialFile.value,
           filetype,
           outputType,
         );
@@ -49,7 +48,7 @@ export default function FileInput(
         isLoading.value = false;
       }
     }
-  }, [initialFile]);
+  }, [initialFile.value]);
 
   useCSP((csp) => {
     if (!csp.directives.styleSrc) {
