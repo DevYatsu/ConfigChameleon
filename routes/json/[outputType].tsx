@@ -1,4 +1,9 @@
-import { Handlers, PageProps, RouteContext, defineRoute } from "$fresh/server.ts";
+import {
+  defineRoute,
+  Handlers,
+  PageProps,
+  RouteContext,
+} from "$fresh/server.ts";
 import ConvertionPage from "../../components/ConvertionPage.tsx";
 import { generateFile } from "../../utils/file.ts";
 import { retrieveRequestFile } from "../../utils/retrieveRequestFile.ts";
@@ -8,7 +13,7 @@ import {
   JsonToXml,
   JsonToYaml,
 } from "../../utils/json.ts";
-import {supportedFormatTypes} from "../../utils/supportedFormatTypes.ts";
+import { supportedFormatTypes } from "../../utils/supportedFormatTypes.ts";
 
 const fileType = "json";
 
@@ -17,10 +22,10 @@ export const handler: Handlers<File> = {
     const outputType: string = ctx.params.outputType;
 
     if (
-    (supportedFormatTypes[fileType] as string[]).indexOf(
-      outputType.toUpperCase(),
-    ) === -1
-  ) {
+      (supportedFormatTypes[fileType] as string[]).indexOf(
+        outputType.toUpperCase(),
+      ) === -1
+    ) {
       return new Response(`Output type ${outputType} not supported`, {
         status: 400,
       });
@@ -57,7 +62,7 @@ export const handler: Handlers<File> = {
           return new Response(file);
         }
         case "yaml": {
-          const yamlContent = JsonToYaml(jsonObj); 
+          const yamlContent = JsonToYaml(jsonContent);
           const file: File = generateFile(
             yamlContent,
             "application/yaml",
