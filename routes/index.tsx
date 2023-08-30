@@ -12,21 +12,30 @@ export default function Home({ route }: PageProps) {
     if (!csp.directives.styleSrc) {
       csp.directives.styleSrc = [];
     }
-    csp.directives.styleSrc.push("http://localhost:8000/style.css");
-    csp.directives.fontSrc = [
-      "http://localhost:8000/fonts/",
-      "http://localhost:8000/icon/",
-    ];
-    csp.directives.scriptSrc = ["http://localhost:8000/_frsh/js/"];
+    if (!csp.directives.fontSrc) {
+      csp.directives.fontSrc = [];
+    }
+    if (!csp.directives.scriptSrc) {
+      csp.directives.scriptSrc = [];
+    }
+    csp.directives.styleSrc.push("http://localhost:8000/css/");
+    csp.directives.fontSrc.push("http://localhost:8000/fonts/");
+    csp.directives.fontSrc.push("http://localhost:8000/icon/");
+    csp.directives.scriptSrc.push("http://localhost:8000/_frsh/js/");
   });
 
   return (
     <>
       <Head>
         <title>Home | Convert And Minify</title>
-        <link rel="stylesheet" href={asset("style.css")} />
-        <link rel="preconnect" href="https://testfonts.com" />
-        <link rel="preconnect" href="https://testfonts.com/fonts/" />
+        <link
+          rel="stylesheet"
+          href={asset("http://localhost:8000/css/style.css")}
+        />
+        <meta
+          name="description"
+          content="Home Page | Convert your files and minify them without limit!"
+        />
       </Head>
       <NavBar route={route} />
       <div class="relative w-full z-20">

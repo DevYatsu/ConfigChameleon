@@ -9,14 +9,12 @@ export default defineConfig({
   plugins: [
     twindPlugin(twindConfig),
     freshSEOPlugin(manifest, {
-      include: Array.from(
-        [
-          ...supportedTypes.json.map((t) => `/json/${t.toLowerCase()}`),
-          ...supportedTypes.yaml.map((t) => `/yaml/${t.toLowerCase()}`),
-          ...supportedTypes.csv.map((t) => `/csv/${t.toLowerCase()}`),
-          ...supportedTypes.xml.map((t) => `/xml/${t.toLowerCase()}`),
-        ],
-      ),
+      include: [
+        ...supportedTypes.json.map((t) => `/json/${t.toLowerCase()}`),
+        ...supportedTypes.yaml.map((t) => `/yaml/${t.toLowerCase()}`),
+        ...supportedTypes.csv.map((t) => `/csv/${t.toLowerCase()}`),
+        ...supportedTypes.xml.map((t) => `/xml/${t.toLowerCase()}`),
+      ],
     }),
   ],
 });

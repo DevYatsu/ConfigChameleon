@@ -1,5 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
-import { Head, useCSP, asset } from '$fresh/runtime.ts';
+import { asset, Head, useCSP } from "$fresh/runtime.ts";
 import { ErrorToast } from "../utils/Toast.ts";
 import { fetchDataAndDownloadFile, isFileSizeTooLarge } from "../utils/file.ts";
 import Loader from "../components/Loader.tsx";
@@ -58,9 +58,7 @@ export default function FileInput(
     csp.directives.styleSrc.push(
       "https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css",
     );
-    csp.directives.styleSrc.push(
-      "https://localhost:8000/index.css",
-    );
+    csp.directives.styleSrc.push("http://localhost:8000/css/");
   });
 
   return (
@@ -69,9 +67,14 @@ export default function FileInput(
         <link
           rel="stylesheet"
           type="text/css"
-          href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+          href={asset(
+            "https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css",
+          )}
         />
-        <link rel="stylesheet" href={asset("/index.css")} />
+        <link
+          rel="stylesheet"
+          href={asset("http://localhost:8000/css/index.css")}
+        />
       </Head>
       <div class="flex justify-center py-8 px-5 h-full">
         {isLoading.value
