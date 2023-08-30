@@ -1,6 +1,6 @@
-import { apply } from "twind";
 import { PropsWithOptionalChildren } from "../routes/index.tsx";
 import FormatButton from "./FormatButton.tsx";
+import { twMerge } from "npm:tailwind-merge";
 
 export type FormatVariants =
   | "XML"
@@ -22,9 +22,10 @@ export default function ConversionButtonsSection(
 ) {
   return (
     <div
-      class={apply`w-full flex justify-center px-16 pt-8 pb-12 ${
-        cls ? cls : ""
-      } lg:hover:(bg-gradient-to-b from-indigo-400 to-[#e5fcf5]) rounded transition`}
+      class={twMerge(
+        "w-full flex justify-center px-16 pt-8 pb-12 lg:hover:(bg-gradient-to-b from-indigo-400 to-[#e5fcf5]) rounded transition",
+        cls,
+      )}
     >
       <div class="flex flex-col w-60">
         <h2 class="text(5xl red-500 lg:6xl) tracking-wide font-extrabold bg(clip-text gradient-to-r) to-emerald-600 from-sky-400 pb-5 -top-3 -left-8 relative">
