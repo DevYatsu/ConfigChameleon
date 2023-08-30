@@ -9,8 +9,12 @@ export default function App({ Component }: AppProps) {
     if (!csp.directives.fontSrc) {
       csp.directives.fontSrc = [];
     }
+    if (!csp.directives.manifestSrc) {
+      csp.directives.manifestSrc = [];
+    }
     csp.directives.imgSrc.push("http://localhost:8000/images/");
     csp.directives.fontSrc.push("https://fonts.gstatic.com/");
+    csp.directives.manifestSrc.push("http://localhost:8000/manifest.json");
   });
 
   return (
@@ -19,6 +23,8 @@ export default function App({ Component }: AppProps) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#3730A3" />
+        <link rel="manifest" href="/manifest.json" />
+
         <link
           rel="preconnect"
           href={asset("http://localhost:8000/")}

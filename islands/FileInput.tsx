@@ -19,10 +19,13 @@ export default function FileInput(
     const file: File = e.target.files[0];
     if (file.type.indexOf(filetype) === -1) {
       ErrorToast(`Invalid file type! Expected '${filetype}' file`);
+      initialFile.value = null;
+
       return;
     }
     if (isFileSizeTooLarge(file, 15 * 1024 * 1024)) {
       ErrorToast("File Size exceeds 10 MB! Cannot Proceed file!");
+      initialFile.value = null;
       return;
     }
     if (file) {
@@ -44,6 +47,7 @@ export default function FileInput(
         );
       } catch (error) {
         console.log(error);
+        initialFile.value = null;
       } finally {
         isLoading.value = false;
       }
