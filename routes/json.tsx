@@ -47,18 +47,20 @@ export default function ({ data }: PageProps) {
           )}
         />
       </Head>
-      <NavBar />
-      <main>
-        <div class="relative w-full z-20 pb-5">
-          <h1 class="text-slate-900 dark:text-slate-50 font-extrabold font-pacifico text-4xl sm:text-4xl lg:text-5xl tracking-widest z-10 text-center xl:text-left relative px-5 pt-12 xl:pl-40">
-            Generate random json
-          </h1>
-        </div>
+      <div class="h-full min-h-screen flex flex-col">
+        <NavBar />
+        <main class="h-full flex-1 flex flex-col">
+          <div class="relative w-full z-20 pb-5 flex flex-col">
+            <h1 class="text-slate-900 dark:text-slate-50 font-extrabold font-pacifico text-4xl sm:text-4xl lg:text-5xl tracking-widest z-10 text-center xl:text-left relative px-5 pt-12 xl:pl-40">
+              Generate random json
+            </h1>
+          </div>
 
-        <div class="min-w-screen h-full flex items-center justify-center pt-12">
-          <JsonViewer data={data} />
-        </div>
-      </main>
+          <div class="w-full h-full flex items-center justify-center pt-10 pb-10 sm:pt-32">
+            <JsonViewer data={data} />
+          </div>
+        </main>
+      </div>
     </>
   );
 }
