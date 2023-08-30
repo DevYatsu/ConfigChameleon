@@ -28,7 +28,7 @@ export default function ConversionButtonsSection(
       )}
     >
       <div class="flex flex-col w-60">
-        <h2 class="text(5xl red-500 lg:6xl) tracking-wide font-extrabold bg(clip-text gradient-to-r) to-emerald-600 from-sky-400 pb-5 -top-3 -left-8 relative">
+        <h2 class="text(5xl red-500 lg:6xl) tracking-wide font-extrabold bg(clip-text gradient-to-r) to-emerald-600 from-sky-400 pb-5 -top-3 lg:-left-5 -left-8 xl:-left-8 relative">
           {title}
           <span class="text(indigo-500 4xl lg:5xl) tracking-smallest font-extrabold absolute z-50 lg:top-10 top-6 left-5">
             To

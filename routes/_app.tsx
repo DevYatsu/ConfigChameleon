@@ -12,9 +12,15 @@ export default function App({ Component }: AppProps) {
     if (!csp.directives.manifestSrc) {
       csp.directives.manifestSrc = [];
     }
+    if (!csp.directives.scriptSrc) {
+      csp.directives.scriptSrc = [];
+    }
     csp.directives.imgSrc.push("http://localhost:8000/images/");
     csp.directives.fontSrc.push("https://fonts.gstatic.com/");
     csp.directives.manifestSrc.push("http://localhost:8000/manifest.json");
+    csp.directives.scriptSrc.push(
+      "http://localhost:8000/service-worker.js",
+    );
   });
 
   return (
@@ -38,6 +44,11 @@ export default function App({ Component }: AppProps) {
         <link rel="preconnect" href={asset("https://fonts.gstatic.com/")} />
         <link rel="preconnect" href={asset("http://localhost:8000/fonts/")} />
         <link rel="preconnect" href={asset("http://localhost:8000/css/")} />
+
+        <script
+          defer
+          src={asset("http://localhost:8000/service-worker.js")}
+        />
 
         <meta http-equiv="Content-Security-Policy" content="base-uri 'self'" />
       </head>
