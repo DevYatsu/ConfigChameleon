@@ -18,7 +18,6 @@ export default function Home({ route }: PageProps) {
     if (!csp.directives.scriptSrc) {
       csp.directives.scriptSrc = [];
     }
-    csp.directives.styleSrc.push("http://localhost:8000/css/");
     csp.directives.styleSrc.push("https://fonts.googleapis.com/");
     csp.directives.fontSrc.push("http://localhost:8000/fonts/");
     csp.directives.fontSrc.push("http://localhost:8000/icon/");
@@ -28,7 +27,12 @@ export default function Home({ route }: PageProps) {
   return (
     <>
       <Head>
-        <title>Home | Convert And Minify</title>
+        <title>ConfigChameleon: Effortless File Format Conversions</title>
+        <meta
+          property="og:title"
+          content="ConfigChameleon: Effortless File Format Conversions"
+        />
+
         <link
           rel="stylesheet"
           href={asset(
@@ -44,7 +48,11 @@ export default function Home({ route }: PageProps) {
 
         <meta
           name="description"
-          content="Home Page | Convert your files and minify them without limit!"
+          content="ConfigChameleon | Transforming Formats, Simplifying Workflows and minify your workload."
+        />
+        <meta
+          property="og:description"
+          content="ConfigChameleon | Transforming Formats, Simplifying Workflows and minify your workload."
         />
       </Head>
       <NavBar route={route} />

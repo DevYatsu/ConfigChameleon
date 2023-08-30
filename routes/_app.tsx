@@ -24,33 +24,35 @@ export default function App({ Component }: AppProps) {
   });
 
   return (
-    <html lang="en-EN">
+    <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="ConfigChameleon" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
         <meta name="theme-color" content="#3730A3" />
         <link rel="manifest" href="/manifest.json" />
+        <link rel="canonical" href="http://localhost:8000/" />
 
         <link
           rel="preconnect"
-          href={asset("http://localhost:8000/")}
+          href={asset("/")}
           crossOrigin="anonymous"
         />
         <link
           rel="icon"
-          href={asset("http://localhost:8000/images/favicon.ico")}
+          href={asset("/images/favicon.ico")}
           type="image/x-icon"
         />
         <link rel="preconnect" href={asset("https://fonts.gstatic.com/")} />
-        <link rel="preconnect" href={asset("http://localhost:8000/fonts/")} />
-        <link rel="preconnect" href={asset("http://localhost:8000/css/")} />
+        <link rel="preconnect" href={asset("/fonts/")} />
 
         <script
           defer
-          src={asset("http://localhost:8000/service-worker.js")}
+          src={asset("/service-worker.js")}
         />
-
-        <meta http-equiv="Content-Security-Policy" content="base-uri 'self'" />
       </head>
       <body class="h-full min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white ">
         <Component />

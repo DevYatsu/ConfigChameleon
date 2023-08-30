@@ -2,7 +2,7 @@ export default function Loader() {
   return (
     <div class="loader">
       Loading
-      <span></span>
+      <span class="loader-text"></span>
     </div>
   );
 }

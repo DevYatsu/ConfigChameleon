@@ -6,10 +6,12 @@ type NavLinkProps = {
   name: string;
   currentPage?: boolean;
   cls?: string;
+  accesskey: string;
+  ariaHidden: boolean;
 };
 
 export default function NavLink(
-  { link, target, name, currentPage, cls }: NavLinkProps,
+  { link, target, name, currentPage, cls, accesskey, ariaHidden }: NavLinkProps,
 ) {
   return (
     <>
@@ -21,6 +23,8 @@ export default function NavLink(
               target={target ? target : ""}
               aria-current="page"
               class="text-indigo-300"
+              accessKey={accesskey}
+              aria-hidden={ariaHidden}
             >
               {name}
             </a>
@@ -32,6 +36,8 @@ export default function NavLink(
               href={link}
               target={target ? target : ""}
               class=" hover:text-indigo-700 dark:hover:text-indigo-100 transition duration-300"
+              accessKey={accesskey}
+              aria-hidden={ariaHidden}
             >
               {name}
             </a>

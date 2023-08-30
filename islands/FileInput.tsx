@@ -61,7 +61,6 @@ export default function FileInput(
     csp.directives.styleSrc.push(
       "https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css",
     );
-    csp.directives.styleSrc.push("http://localhost:8000/css/");
   });
 
   return (
@@ -73,10 +72,6 @@ export default function FileInput(
           href={asset(
             "https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css",
           )}
-        />
-        <link
-          rel="stylesheet"
-          href={asset("http://localhost:8000/css/index.css")}
         />
       </Head>
       <div class="flex justify-center py-8 px-5 h-full">
@@ -96,9 +91,9 @@ function Input(
   { filetype, onInput }: { filetype: string; onInput: (e: any) => void },
 ) {
   return (
-    <div class="input-div">
+    <div class="input-div file-input-container">
       <input
-        class="input"
+        class="input file-input"
         name="file"
         type="file"
         accept={`.${filetype}`}

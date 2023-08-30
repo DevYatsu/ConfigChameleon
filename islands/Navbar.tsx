@@ -6,10 +6,15 @@ import { signal } from "@preact/signals";
 import { batch, computed, effect } from "@preact/signals-core";
 
 const navLinks = [
-  { link: "/", name: "Home" },
-  { link: "/password", name: "Random Passwords" },
-  { link: "/json", name: "Random Json" },
-  { link: "https://github.com/DevYatsu", name: "My Github", target: "_blank" },
+  { link: "/", name: "Home", accesskey: "homepage" },
+  { link: "/password", name: "Random Passwords", accesskey: "password" },
+  { link: "/json", name: "Random Json", accesskey: "json" },
+  {
+    link: "https://github.com/DevYatsu",
+    name: "My Github",
+    target: "_blank",
+    accesskey: "github",
+  },
 ];
 
 const isOpen = signal(false);
@@ -52,6 +57,7 @@ export default function NavBar(
               cls={`pb-1 ${
                 !isBigScreen.value && !isOpen.value ? "hidden" : ""
               }`}
+              ariaHidden={!isBigScreen.value && !isOpen.value}
               currentPage={route === el.link}
             />
           );
@@ -63,6 +69,7 @@ export default function NavBar(
               cls={`sm:hidden ${
                 (!isBigScreen.value && isOpen.value) ? "hidden" : ""
               }`}
+              ariaHidden={!isBigScreen.value && isOpen.value}
               currentPage={route === el.link}
             />
           );

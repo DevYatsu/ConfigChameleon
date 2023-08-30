@@ -21,9 +21,8 @@ export default function FormatButton({ text, variant, href }: FormatButton) {
     ? "gray-500"
     : "black";
   return (
-    <a
-      href={href}
-      aria-label={`${text} conversion`}
+    <button
+      aria-label={`${variant.toLowerCase()}-conversion`}
       class="min-w-[200px] w-50 select-none relative inline-flex items-center justify-center px-18 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 dark:bg-slate-800 rounded-lg group"
     >
       <span
@@ -32,7 +31,16 @@ export default function FormatButton({ text, variant, href }: FormatButton) {
       </span>
       <span class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-gray-700">
       </span>
-      <span class="relative">{text ? text : variant}</span>
-    </a>
+      <a
+        href={href}
+        aria-label={`redirect to ${
+          href.split("/")[0]
+        } to ${variant.toLowerCase()} conversion page`}
+        accessKey={href.toUpperCase()}
+        class="w-full h-full relative overflow-hidden group"
+      >
+        <span class="relative text-lg">{text ? text : variant}</span>
+      </a>
+    </button>
   );
 }
