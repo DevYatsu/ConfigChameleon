@@ -17,7 +17,8 @@ import * as $11 from "./routes/password.tsx";
 import * as $12 from "./routes/xml/[outputType].tsx";
 import * as $13 from "./routes/yaml/[outputType].tsx";
 import * as $$0 from "./islands/FileInput.tsx";
-import * as $$1 from "./islands/Navbar.tsx";
+import * as $$1 from "./islands/JsonViewerAsyncWrapper.tsx";
+import * as $$2 from "./islands/Navbar.tsx";
 
 const manifest = {
   routes: {
@@ -38,7 +39,8 @@ const manifest = {
   },
   islands: {
     "./islands/FileInput.tsx": $$0,
-    "./islands/Navbar.tsx": $$1,
+    "./islands/JsonViewerAsyncWrapper.tsx": $$1,
+    "./islands/Navbar.tsx": $$2,
   },
   baseUrl: import.meta.url,
 };

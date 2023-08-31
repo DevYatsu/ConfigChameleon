@@ -2,8 +2,8 @@ import { PageProps, RouteConfig } from "$fresh/server.ts";
 import NavBar from "../islands/Navbar.tsx";
 import { asset, Head, useCSP } from "$fresh/runtime.ts";
 import { Handlers } from "$fresh/server.ts";
-import JsonViewer from "../components/JsonViewer.tsx";
 import TitleSection from "../components/TitleSection.tsx";
+import JsonViewerAsyncWrapper from "../islands/JsonViewerAsyncWrapper.tsx";
 
 export const handler: Handlers<[] | object> = {
   async GET(_req, ctx) {
@@ -33,6 +33,8 @@ export default function ({ data }: PageProps) {
 
     csp.directives.styleSrc.push("https://fonts.googleapis.com/");
   });
+
+  const todoId = Math.floor(Math.random() * 99);
 
   return (
     <>
@@ -71,7 +73,14 @@ export default function ({ data }: PageProps) {
             subtitle="Reload to try it!"
           />
           <div class="w-full h-full flex items-center justify-center pt-12 pb-10">
-            <JsonViewer data={data} />
+            <JsonViewerAsyncWrapper
+              cacheKeyword={["todo", String(todoId)]}
+              queryFn={async () => {
+                return await fetch(
+                  `https://jsonplaceholder.typicode.com/todos/${todoId}`,
+                ).then((res) => res.json());
+              }}
+            />
           </div>
         </main>
       </div>
