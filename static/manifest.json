@@ -1,0 +1,33 @@
+{
+  "name": "ConfigChameleon: Adapt. Transform. Transcend.",
+  "short_name": "ConfigChameleon",
+  "description": "Streamline your workflow with ConfigChameleon, the ultimate file converter designed for professionals and configuration enthusiasts. Effortlessly transform JSON, YAML, XML, and CSV formats, ensuring seamless compatibility and data interchange. Simplify complex configurations and data transformations with a user-friendly interface that caters to your professional needs. Experience precision, efficiency, and reliability in every conversion. ConfigChameleon - Your go-to solution for mastering file formats.",
+  "theme_color": "#3730A3",
+  "display": "standalone",
+  "display_override": ["window-control-overlay", "minimal-ui"],
+  "background_color": "#ffffff",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "./images/favicon.ico",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "./images/icon.256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "./images/icon.512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "./images/maskable_icon.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
