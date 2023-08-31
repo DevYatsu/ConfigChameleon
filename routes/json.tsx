@@ -3,12 +3,15 @@ import NavBar from "../islands/Navbar.tsx";
 import { asset, Head, useCSP } from "$fresh/runtime.ts";
 import { Handlers } from "$fresh/server.ts";
 import JsonViewer from "../components/JsonViewer.tsx";
+import TitleSection from "../components/TitleSection.tsx";
 
 export const handler: Handlers<[] | object> = {
   async GET(_req, ctx) {
     try {
       const data = await fetch(
-        `https://random-data-api.com/api/v2/banks?size=1&response_type=json`,
+        `https://jsonplaceholder.typicode.com/todos/${
+          Math.floor(Math.random() * 100)
+        }`,
       )
         .then((response) => response.json());
 
@@ -26,10 +29,8 @@ export const handler: Handlers<[] | object> = {
 
 export default function ({ data }: PageProps) {
   useCSP((csp) => {
-    if (!csp.directives.scriptSrc) csp.directives.scriptSrc = [];
     if (!csp.directives.styleSrc) csp.directives.styleSrc = [];
 
-    csp.directives.scriptSrc.push("http://localhost:8000/_frsh/js/");
     csp.directives.styleSrc.push("https://fonts.googleapis.com/");
   });
 
@@ -65,15 +66,10 @@ export default function ({ data }: PageProps) {
       <div class="h-full min-h-screen flex flex-col">
         <NavBar />
         <main class="h-full flex-1 flex flex-col">
-          <div class="relative w-full z-20 pb-5 flex flex-col">
-            <h1 class="text-slate-900 dark:text-slate-50 font-extrabold font-pacifico text-4xl sm:text-4xl lg:text-5xl tracking-widest z-10 text-center xl:text-left relative px-5 pt-12 xl:pl-40">
-              Generate random json
-            </h1>
-            <span class="font-secondary text-2xl text-center block sm:absolute -bottom-4 left-1/2 xl:left-48 text-gray-400 select-none -z-10">
-              Reload to try it!
-            </span>
-          </div>
-
+          <TitleSection
+            title="Generate random json"
+            subtitle="Reload to try it!"
+          />
           <div class="w-full h-full flex items-center justify-center pt-12 pb-10">
             <JsonViewer data={data} />
           </div>

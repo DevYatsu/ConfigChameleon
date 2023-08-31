@@ -1,4 +1,5 @@
 import { Head } from "$fresh/runtime.ts";
+import { RouteConfig } from "$modules/fresh@1.4.2/server.ts";
 
 export default function Error404() {
   return (
@@ -40,3 +41,7 @@ export default function Error404() {
     </>
   );
 }
+
+export const config: RouteConfig = {
+  csp: true,
+};

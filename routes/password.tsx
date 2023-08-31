@@ -10,13 +10,6 @@ export const handler: Handlers = {
 };
 
 export default function PasswordPage({ data, route }: PageProps) {
-  useCSP((csp) => {
-    if (!csp.directives.scriptSrc) {
-      csp.directives.scriptSrc = [];
-    }
-    csp.directives.scriptSrc.push("http://localhost:8000/_frsh/js/");
-  });
-
   return (
     <>
       <Head>

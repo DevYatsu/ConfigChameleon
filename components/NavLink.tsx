@@ -21,7 +21,7 @@ export default function NavLink(
               href={link}
               target={target ? target : ""}
               aria-current="page"
-              class="text-indigo-300"
+              class="dark:text-indigo-300 text-indigo-600"
               accessKey={accesskey}
             >
               {name}
@@ -33,7 +33,7 @@ export default function NavLink(
             <a
               href={link}
               target={target ? target : ""}
-              class=" hover:text-indigo-700 dark:hover:text-indigo-100 transition duration-300"
+              class=" hover:text-indigo-800 dark:hover:text-indigo-100 transition duration-300"
               accessKey={accesskey}
             >
               {name}

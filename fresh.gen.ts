@@ -11,10 +11,11 @@ import * as $5 from "./routes/greet/[name].tsx";
 import * as $6 from "./routes/index.tsx";
 import * as $7 from "./routes/json.tsx";
 import * as $8 from "./routes/json/[outputType].tsx";
-import * as $9 from "./routes/minify/[fileType].tsx";
-import * as $10 from "./routes/password.tsx";
-import * as $11 from "./routes/xml/[outputType].tsx";
-import * as $12 from "./routes/yaml/[outputType].tsx";
+import * as $9 from "./routes/json/_middleware.ts";
+import * as $10 from "./routes/minify/[fileType].tsx";
+import * as $11 from "./routes/password.tsx";
+import * as $12 from "./routes/xml/[outputType].tsx";
+import * as $13 from "./routes/yaml/[outputType].tsx";
 import * as $$0 from "./islands/FileInput.tsx";
 import * as $$1 from "./islands/Navbar.tsx";
 
@@ -29,10 +30,11 @@ const manifest = {
     "./routes/index.tsx": $6,
     "./routes/json.tsx": $7,
     "./routes/json/[outputType].tsx": $8,
-    "./routes/minify/[fileType].tsx": $9,
-    "./routes/password.tsx": $10,
-    "./routes/xml/[outputType].tsx": $11,
-    "./routes/yaml/[outputType].tsx": $12,
+    "./routes/json/_middleware.ts": $9,
+    "./routes/minify/[fileType].tsx": $10,
+    "./routes/password.tsx": $11,
+    "./routes/xml/[outputType].tsx": $12,
+    "./routes/yaml/[outputType].tsx": $13,
   },
   islands: {
     "./islands/FileInput.tsx": $$0,

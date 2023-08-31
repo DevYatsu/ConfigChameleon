@@ -23,7 +23,7 @@ export default function Viewer(
 
   return (
     <>
-      <div class="mx-5 w-full lg:w-6/12 bg-gray-800 shadow-2xl rounded-lg overflow-hidden">
+      <div class="mx-5 w-full lg:w-6/12 bg-[#e5fcf5] dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden">
         <div id="header-buttons" class="py-3 px-4 flex hljs-number">
           <div class="rounded-full w-3 h-3 bg-red-500 mr-2"></div>
           <div class="rounded-full w-3 h-3 bg-yellow-500 mr-2"></div>
@@ -35,7 +35,7 @@ export default function Viewer(
         </div>
         <div
           id="code-area"
-          class="py-4 px-4 mt-1 text-white text-xl whitespace-pre-wrap min-h-[100px]"
+          class="py-4 px-4 mt-1 text-white text-xl whitespace-pre-wrap min-h-[100px] "
           dangerouslySetInnerHTML={{ __html: finalString }}
         >
         </div>

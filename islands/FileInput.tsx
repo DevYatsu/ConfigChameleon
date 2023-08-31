@@ -55,10 +55,8 @@ export default function FileInput(
   }, [initialFile.value]);
 
   useCSP((csp) => {
-    if (!csp.directives.styleSrc) {
-      csp.directives.styleSrc = [];
-    }
-    csp.directives.styleSrc.push(
+    if (!csp.directives.styleSrcElem) csp.directives.styleSrcElem = [];
+    csp.directives.styleSrcElem.push(
       "https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css",
     );
   });
@@ -66,6 +64,13 @@ export default function FileInput(
   return (
     <>
       <Head>
+        <link
+          rel="preconnect"
+          href={asset(
+            "https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css",
+          )}
+          crossOrigin=""
+        />
         <link
           rel="stylesheet"
           type="text/css"

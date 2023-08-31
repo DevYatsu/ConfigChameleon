@@ -3,21 +3,21 @@ import { asset, useCSP } from "$fresh/runtime.ts";
 
 export default function App({ Component }: AppProps) {
   useCSP((csp) => {
-    if (!csp.directives.imgSrc) {
-      csp.directives.imgSrc = [];
-    }
-    if (!csp.directives.fontSrc) {
-      csp.directives.fontSrc = [];
-    }
-    if (!csp.directives.manifestSrc) {
-      csp.directives.manifestSrc = [];
-    }
-    if (!csp.directives.scriptSrc) {
-      csp.directives.scriptSrc = [];
-    }
+    if (!csp.directives.imgSrc) csp.directives.imgSrc = [];
+    if (!csp.directives.fontSrc) csp.directives.fontSrc = [];
+    if (!csp.directives.manifestSrc) csp.directives.manifestSrc = [];
+    if (!csp.directives.workerSrc) csp.directives.workerSrc = [];
+    if (!csp.directives.scriptSrc) csp.directives.scriptSrc = [];
+    if (!csp.directives.defaultSrc) csp.directives.defaultSrc = [];
+
     csp.directives.imgSrc.push("http://localhost:8000/images/");
     csp.directives.fontSrc.push("https://fonts.gstatic.com/");
     csp.directives.manifestSrc.push("http://localhost:8000/manifest.json");
+    csp.directives.workerSrc.push(
+      "http://localhost:8000/service-worker.js",
+    );
+    csp.directives.scriptSrc.push("http://localhost:8000/_frsh/refresh.js");
+    csp.directives.scriptSrc.push("http://localhost:8000/_frsh/js/");
     csp.directives.scriptSrc.push(
       "http://localhost:8000/service-worker.js",
     );
@@ -49,11 +49,9 @@ export default function App({ Component }: AppProps) {
           type="image/x-icon"
         />
         <link rel="preconnect" href={asset("https://fonts.gstatic.com/")} />
-        <link rel="preconnect" href={asset("/fonts/")} />
-
         <script
           defer
-          src={asset("/service-worker.js")}
+          src={asset("http://localhost:8000/service-worker.js")}
         />
       </head>
       <body class="h-full min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white ">
