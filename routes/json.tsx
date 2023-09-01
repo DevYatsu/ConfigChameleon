@@ -1,39 +1,43 @@
-import { PageProps, RouteConfig } from "$fresh/server.ts";
+import { RouteConfig, RouteContext } from "$fresh/server.ts";
 import NavBar from "../islands/Navbar.tsx";
 import { asset, Head, useCSP } from "$fresh/runtime.ts";
 import TitleSection from "../components/TitleSection.tsx";
-import JsonViewerAsyncWrapper from "../islands/JsonViewerAsyncWrapper.tsx";
+import JsonViewer from "../components/JsonViewer.tsx";
+import RefreshButton from "../components/RefreshButton.tsx";
+import { signal } from "@preact/signals";
 
-// export const handler: Handlers<[] | object> = {
-//   async GET(_req, ctx) {
-//     try {
-//       const data = await fetch(
-//         `https://jsonplaceholder.typicode.com/todos/${
-//           Math.floor(Math.random() * 100)
-//         }`,
-//       )
-//         .then((response) => response.json());
+const data = signal<object | null>(null);
 
-//       if (!data) {
-//         return new Response("Could not retrieve json data.", { status: 404 });
-//       }
-//       return ctx.render(data);
-//     } catch (error) {
-//       return ctx.render({
-//         error: [[[[[[[[[[[["Failed to fetch data"]]]]]]]]]]]],
-//       });
-//     }
-//   },
-// };
+export default async function (_req: Request, ctx: RouteContext) {
+  async function fetchRandomTodo() {
+    try {
+      const resp = await fetch(
+        `https://jsonplaceholder.typicode.com/todos/${
+          Math.floor(Math.random() * 100)
+        }`,
+      );
 
-export default function ({ data }: PageProps) {
-  useCSP((csp) => {
-    if (!csp.directives.styleSrc) csp.directives.styleSrc = [];
+      if (!resp.ok) {
+        return {
+          message: "Something went wrong!",
+        };
+      }
+      const data = await resp.json() as object;
 
-    csp.directives.styleSrc.push("https://fonts.googleapis.com/");
-  });
+      return data;
+    } catch (error) {
+      return {
+        message: "Something went wrong!",
+      };
+    }
+  }
 
-  const todoId = Math.floor(Math.random() * 99);
+  const handleClick = async () => {
+    console.log("efef");
+    data.value = await fetchRandomTodo();
+  };
+
+  data.value = await fetchRandomTodo();
 
   return (
     <>
@@ -71,22 +75,18 @@ export default function ({ data }: PageProps) {
             title="Generate random json"
             subtitle="Reload to try it!"
           />
-          <div class="w-full h-full flex items-center justify-center pt-12 pb-10">
-            <JsonViewerAsyncWrapper
-              queryKey={["todo", String(todoId)]}
-              queryFn={async () => {
-                return await fetch(
-                  `https://jsonplaceholder.typicode.com/todos/${todoId}`,
-                ).then((res) => res.json());
-              }}
+          <div class="w-full h-full flex flex-col items-center justify-center pt-12 pb-10">
+            <JsonViewer
+              data={data.value}
             />
+            <div className="pt-8">
+              <RefreshButton
+                onClick={handleClick}
+              />
+            </div>
           </div>
         </main>
       </div>
     </>
   );
 }
-
-export const config: RouteConfig = {
-  csp: true,
-};

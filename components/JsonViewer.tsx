@@ -7,7 +7,9 @@ import sanitizeHtml from "npm:sanitize-html";
 hljs.registerLanguage("json", json);
 
 export default function Viewer(
-  { data }: { data: Record<string, string | object | number | boolean> | null },
+  { data }: {
+    data: object;
+  },
 ) {
   if (data === null) {
     data = { "data-retrieved": false };

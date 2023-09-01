@@ -21,6 +21,9 @@ export default function App({ Component }: AppProps) {
     csp.directives.scriptSrc.push(
       "http://localhost:8000/service-worker.js",
     );
+
+    if (!csp.directives.styleSrc) csp.directives.styleSrc = [];
+    csp.directives.styleSrc.push("https://fonts.googleapis.com/");
   });
 
   return (

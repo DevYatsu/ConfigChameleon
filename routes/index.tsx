@@ -1,19 +1,11 @@
-import { ComponentChildren } from "preact";
 import NavBar from "../islands/Navbar.tsx";
 import { PageProps, RouteConfig } from "$fresh/server.ts";
 import { asset, Head, useCSP } from "$fresh/runtime.ts";
 import ConversionButtonsSection from "../components/ConversionButtonsSection.tsx";
 import { supportedFormatTypes } from "../utils/supportedFormatTypes.ts";
 import TitleSection from "../components/TitleSection.tsx";
-export type PropsWithChildren<T> = { children: ComponentChildren } & T;
-export type PropsWithOptionalChildren<T> = { children?: ComponentChildren } & T;
 
 export default function Home({ route }: PageProps) {
-  useCSP((csp) => {
-    if (!csp.directives.styleSrc) csp.directives.styleSrc = [];
-    csp.directives.styleSrc.push("https://fonts.googleapis.com/");
-  });
-
   return (
     <>
       <Head>
