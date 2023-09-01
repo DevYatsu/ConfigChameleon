@@ -1,16 +1,16 @@
 import JsonViewer from "../components/JsonViewer.tsx";
 import Loader from "../components/Loader.tsx";
-import { QueryFunction, useQuery } from "npm:@tanstack/react-query";
+import useCachedQuery, { AsyncFunction } from "../hooks/useCachedQuery.ts";
 
 export default function Wrapper(
-  { cacheKeyword, queryFn }: {
-    cacheKeyword: string | string[];
-    queryFn: QueryFunction<any, string[], any>;
+  { queryKey, queryFn }: {
+    queryKey: string | string[];
+    queryFn: AsyncFunction<any, any>;
   },
 ) {
-  const { isLoading, isError, data } = useQuery({
-    queryKey: typeof cacheKeyword === "string" ? [cacheKeyword] : cacheKeyword,
-    queryFn: queryFn,
+  const { isLoading, isError, data } = useCachedQuery({
+    queryKey,
+    queryFn,
   });
 
   if (isLoading) {
@@ -25,6 +25,10 @@ export default function Wrapper(
         }}
       />
     );
+  }
+
+  if (data === null) {
+    return <JsonViewer data={{}} />;
   }
 
   return <JsonViewer data={data} />;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 
-type AsyncFunction<A, O> = (...args: A[]) => Promise<O>;
+export type AsyncFunction<A, O> = (...args: A[]) => Promise<O>;
 
 interface CacheValue {
   value: any;
@@ -9,8 +9,8 @@ interface CacheValue {
 type CacheStorage = Record<string, CacheValue>;
 
 export default function useCachedQuery<T>(
-  { cacheKeyword, queryFn }: {
-    cacheKeyword: string | string[];
+  { queryKey, queryFn }: {
+    queryKey: string | string[];
     queryFn: AsyncFunction<any, T>;
   },
 ) {
@@ -23,7 +23,7 @@ export default function useCachedQuery<T>(
     const fetchData = async () => {
       try {
         const value = await queryFn();
-        setCachedLocalStorageItem(cacheKeyword, value);
+        setCachedLocalStorageItem(queryKey, value);
         setData(value);
       } catch (error) {
         setError(error);
@@ -34,7 +34,7 @@ export default function useCachedQuery<T>(
     };
 
     fetchData();
-  }, [cacheKeyword, queryFn]);
+  }, [queryKey, queryFn]);
 
   return { data, isLoading, isError, error };
 }

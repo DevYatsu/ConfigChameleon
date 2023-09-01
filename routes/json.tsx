@@ -1,31 +1,30 @@
 import { PageProps, RouteConfig } from "$fresh/server.ts";
 import NavBar from "../islands/Navbar.tsx";
 import { asset, Head, useCSP } from "$fresh/runtime.ts";
-import { Handlers } from "$fresh/server.ts";
 import TitleSection from "../components/TitleSection.tsx";
 import JsonViewerAsyncWrapper from "../islands/JsonViewerAsyncWrapper.tsx";
 
-export const handler: Handlers<[] | object> = {
-  async GET(_req, ctx) {
-    try {
-      const data = await fetch(
-        `https://jsonplaceholder.typicode.com/todos/${
-          Math.floor(Math.random() * 100)
-        }`,
-      )
-        .then((response) => response.json());
+// export const handler: Handlers<[] | object> = {
+//   async GET(_req, ctx) {
+//     try {
+//       const data = await fetch(
+//         `https://jsonplaceholder.typicode.com/todos/${
+//           Math.floor(Math.random() * 100)
+//         }`,
+//       )
+//         .then((response) => response.json());
 
-      if (!data) {
-        return new Response("Could not retrieve json data.", { status: 404 });
-      }
-      return ctx.render(data);
-    } catch (error) {
-      return ctx.render({
-        error: [[[[[[[[[[[["Failed to fetch data"]]]]]]]]]]]],
-      });
-    }
-  },
-};
+//       if (!data) {
+//         return new Response("Could not retrieve json data.", { status: 404 });
+//       }
+//       return ctx.render(data);
+//     } catch (error) {
+//       return ctx.render({
+//         error: [[[[[[[[[[[["Failed to fetch data"]]]]]]]]]]]],
+//       });
+//     }
+//   },
+// };
 
 export default function ({ data }: PageProps) {
   useCSP((csp) => {
@@ -74,7 +73,7 @@ export default function ({ data }: PageProps) {
           />
           <div class="w-full h-full flex items-center justify-center pt-12 pb-10">
             <JsonViewerAsyncWrapper
-              cacheKeyword={["todo", String(todoId)]}
+              queryKey={["todo", String(todoId)]}
               queryFn={async () => {
                 return await fetch(
                   `https://jsonplaceholder.typicode.com/todos/${todoId}`,
