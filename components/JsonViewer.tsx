@@ -7,8 +7,12 @@ import sanitizeHtml from "npm:sanitize-html";
 hljs.registerLanguage("json", json);
 
 export default function Viewer(
-  { data }: { data: Record<string, string | [] | object | number> },
+  { data }: { data: Record<string, string | object | number | boolean> | null },
 ) {
+  if (data === null) {
+    data = { "data-retrieved": false };
+  }
+
   const jsonString = beautify(data, null, 4, 80);
 
   const jsonHighlighted =

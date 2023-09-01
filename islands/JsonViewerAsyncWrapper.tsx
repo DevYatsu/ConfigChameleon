@@ -1,17 +1,15 @@
 import JsonViewer from "../components/JsonViewer.tsx";
 import Loader from "../components/Loader.tsx";
-import useCachedQuery, { AsyncFunction } from "../hooks/useCachedQuery.ts";
+import useQuery, { QueryFunction } from "../hooks/useQuery.ts";
 
-export default function Wrapper(
+export default function Wrapper<A,>(
   { queryKey, queryFn }: {
     queryKey: string | string[];
-    queryFn: AsyncFunction<any, any>;
+    queryFn: QueryFunction<Record<string, string | [] | object | number>>;
   },
 ) {
-  const { isLoading, isError, data } = useCachedQuery({
-    queryKey,
-    queryFn,
-  });
+  const { isLoading, isError, error, data } = useQuery(queryKey, queryFn);
+  console.log({ isLoading, isError, data });
 
   if (isLoading) {
     return <Loader />;
@@ -25,10 +23,6 @@ export default function Wrapper(
         }}
       />
     );
-  }
-
-  if (data === null) {
-    return <JsonViewer data={{}} />;
   }
 
   return <JsonViewer data={data} />;
