@@ -1,43 +1,42 @@
-type AsyncFunction<A, O> = (...args: any) => Promise<O>;
+import { useEffect, useState } from "preact/hooks";
 
-type CacheValue = { value: any; subkeys: CacheStorage };
+type AsyncFunction<A, O> = (...args: A[]) => Promise<O>;
+
+interface CacheValue {
+  value: any;
+  subkeys: CacheStorage;
+}
 type CacheStorage = Record<string, CacheValue>;
 
-export default async function useCachedQuery<T>(
+export default function useCachedQuery<T>(
   { cacheKeyword, queryFn }: {
     cacheKeyword: string | string[];
     queryFn: AsyncFunction<any, T>;
   },
 ) {
-  const responseObj: {
-    data: T | null;
-    isError: boolean;
-    isLoading: boolean;
-    error: any;
-  } = {
-    data: null,
-    isError: false,
-    isLoading: true,
-    error: null,
-  };
+  const [data, setData] = useState<T | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [error, setError] = useState<Error | null>(null);
 
-  try {
-    const value = await queryFn();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const value = await queryFn();
+        setCachedLocalStorageItem(cacheKeyword, value);
+        setData(value);
+      } catch (error) {
+        setError(error);
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-    if (typeof cacheKeyword === "string") {
-      setCachedLocalStorageItem(cacheKeyword, value);
-    } else {
-      // todo!!!
-      setCachedLocalStorageItem(cacheKeyword, value);
-    }
-  } catch (error) {
-    responseObj.error = error;
-    responseObj.isError = true;
-  } finally {
-    responseObj.isLoading = false;
-  }
+    fetchData();
+  }, [cacheKeyword, queryFn]);
 
-  return responseObj;
+  return { data, isLoading, isError, error };
 }
 
 const CACHED_STORAGE_NAME = "cached_local_storage";
@@ -63,30 +62,24 @@ const setCachedLocalStorageItem = <T>(
 ) => {
   const storage = getCachedLocalStorage();
 
-  if (typeof keyword === "string") {
-    storage[keyword] = { value, subkeys: {} };
-    localStorage.setItem(CACHED_STORAGE_NAME, JSON.stringify(storage));
-  } else {
-    // need update here
-    // todo!
+  const isArray = Array.isArray(keyword);
 
-    for (let i = 0; i < keyword.length; i++) {
-      if (i === keyword.length - 1) {
-        storage[keyword[i]] = { value: value, subkeys: {} }; // update here
-        break;
-      }
-      if (i === 0) {
-        storage[keyword[i]] = { value: null, subkeys: {} };
-        break;
-      }
+  if (isArray) {
+    let tempStorage = storage;
+    const lastIndex = keyword.length - 1;
 
-      let temp_val: CacheValue = storage[keyword[0]];
-      for (const j = 1; j < i; i++) {
-        temp_val = temp_val.subkeys[keyword[j]];
+    for (let i = 0; i <= lastIndex; i++) {
+      const key = keyword[i];
+      if (i === lastIndex) {
+        tempStorage[key] = { value, subkeys: {} };
+      } else {
+        tempStorage[key] = tempStorage[key] || { value: null, subkeys: {} };
+        tempStorage = tempStorage[key].subkeys;
       }
-      storage[i] = { value: null, subkeys: {} }; // update here
     }
-
-    localStorage.setItem(CACHED_STORAGE_NAME, JSON.stringify(storage));
+  } else {
+    storage[keyword as string] = { value, subkeys: {} };
   }
+
+  localStorage.setItem(CACHED_STORAGE_NAME, JSON.stringify(storage));
 };
