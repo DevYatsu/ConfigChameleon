@@ -1,5 +1,8 @@
-import { defineRoute, Handlers } from "$fresh/server.ts";
+import { defineRoute, Handlers, RouteConfig } from "$fresh/server.ts";
+import { asset, Head } from "$modules/fresh@1.4.2/runtime.ts";
 import ConvertionPage from "../../components/ConvertionPage.tsx";
+import TitleSection from "../../components/TitleSection.tsx";
+import NavBar from "../../islands/Navbar.tsx";
 import { retrieveRequestFile } from "../../utils/retrieveRequestFile.ts";
 import { supportedFormatTypes } from "../../utils/supportedFormatTypes.ts";
 
@@ -36,8 +39,6 @@ export default defineRoute(async (_req, ctx) => {
   const outputType = ctx.params.outputType;
   const title = `${inputType} to ${outputType}`;
 
-  console.log(_req.headers);
-
   if (
     (supportedFormatTypes[fileType] as string[]).indexOf(
       outputType.toUpperCase(),
@@ -47,10 +48,29 @@ export default defineRoute(async (_req, ctx) => {
   }
 
   return (
-    <ConvertionPage
-      title={title}
-      inputType={inputType}
-      outputType={outputType}
-    />
+    <>
+      <Head>
+        <link
+          rel="stylesheet"
+          href={asset(
+            "https://fonts.googleapis.com/css2?family=Pacifico:wght@400&display=swap",
+          )}
+        />
+      </Head>
+      <NavBar />
+      <TitleSection title="Coming soon"></TitleSection>
+    </>
   );
+
+  // return (
+  //   <ConvertionPage
+  //     title={title}
+  //     inputType={inputType}
+  //     outputType={outputType}
+  //   />
+  // );
 });
+
+export const config: RouteConfig = {
+  csp: true,
+};

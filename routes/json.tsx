@@ -1,6 +1,6 @@
-import { RouteConfig, RouteContext } from "$fresh/server.ts";
+import { RouteContext } from "$fresh/server.ts";
 import NavBar from "../islands/Navbar.tsx";
-import { asset, Head, useCSP } from "$fresh/runtime.ts";
+import { asset, Head } from "$fresh/runtime.ts";
 import TitleSection from "../components/TitleSection.tsx";
 import JsonViewer from "../components/JsonViewer.tsx";
 import RefreshButton from "../components/RefreshButton.tsx";
