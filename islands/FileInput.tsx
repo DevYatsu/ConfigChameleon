@@ -12,7 +12,7 @@ export default function FileInput(
   { filetype, outputType }: { filetype: string; outputType: string },
 ) {
   const handleFileChange = (e: any) => {
-    if (!e?.target?.files[0]) {
+    if (!e.target?.files[0]) {
       return;
     }
 
@@ -90,7 +90,7 @@ export default function FileInput(
 }
 
 function Input(
-  { filetype, onInput }: { filetype: string; onInput: (e: any) => void },
+  { filetype, onInput }: { filetype: string; onInput: (e: unknown) => void },
 ) {
   return (
     <div class="input-div file-input-container">
