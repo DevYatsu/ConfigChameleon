@@ -13,7 +13,8 @@ export function JsonToXml(obj: Record<string, unknown>): string {
 export function JsonToToml(obj: Record<string, unknown>): string {
   return stringifyToml(obj);
 }
-export function JsonToYaml(jsonString: string): string {
+export function JsonToYaml(jsonContent: Record<string, unknown>): string {
+  const jsonString = JSON.stringify(jsonContent);
   return json2yaml(jsonString);
 }
 export function JsonToHTML(

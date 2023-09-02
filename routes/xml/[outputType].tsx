@@ -53,7 +53,7 @@ export const handler: Handlers<File> = {
             return new Response(file);
           }
           case "yaml": {
-            const YamlContent = JsonToYaml(JSON.stringify(jsonObj));
+            const YamlContent = JsonToYaml(jsonObj);
             const file = generateFile(
               JSON.stringify(YamlContent),
               "application/yaml",

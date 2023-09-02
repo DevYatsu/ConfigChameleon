@@ -1,4 +1,4 @@
-import { PropsWithOptionalChildren } from "../routes/index.tsx";
+import { PropsWithOptionalChildren } from "../utils/children.ts";
 import FormatButton from "./FormatButton.tsx";
 import { twMerge } from "npm:tailwind-merge";
 

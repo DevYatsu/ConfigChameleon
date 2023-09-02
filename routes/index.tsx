@@ -13,20 +13,6 @@ export default function Home() {
           property="og:title"
           content="ConfigChameleon: Effortless File Format Conversions"
         />
-
-        <link
-          rel="stylesheet"
-          href={asset(
-            "https://fonts.googleapis.com/css2?family=Pacifico:wght@400&display=swap",
-          )}
-        />
-        <link
-          rel="stylesheet"
-          href={asset(
-            "https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display:wght@400&display=swap",
-          )}
-        />
-
         <meta
           name="description"
           content="ConfigChameleon | Transforming Formats, Simplifying Workflows and minify your workload."

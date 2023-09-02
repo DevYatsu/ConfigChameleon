@@ -3,7 +3,6 @@ import { asset, Head } from "$fresh/runtime.ts";
 import TitleSection from "../../components/TitleSection.tsx";
 import JsonViewer from "../../components/JsonViewer.tsx";
 import RefreshButton from "../../islands/RefreshButton.tsx";
-import { signal } from "@preact/signals";
 
 export async function fetchRandomTodo() {
   try {
