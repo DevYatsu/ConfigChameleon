@@ -1,5 +1,4 @@
 import { RouteContext } from "$fresh/server.ts";
-import NavBar from "../../islands/Navbar.tsx";
 import { asset, Head } from "$fresh/runtime.ts";
 import TitleSection from "../../components/TitleSection.tsx";
 import JsonViewer from "../../components/JsonViewer.tsx";
@@ -33,7 +32,6 @@ export default async function (_req: Request, ctx: RouteContext) {
   }
 
   const handleClick = async () => {
-    console.log("efef");
     data.value = await fetchRandomTodo();
   };
 
@@ -68,22 +66,22 @@ export default async function (_req: Request, ctx: RouteContext) {
           )}
         />
       </Head>
-        <main class="h-full flex-1 flex flex-col">
-          <TitleSection
-            title="Generate random json"
-            subtitle="Reload to try it!"
+      <main class="h-full flex-1 flex flex-col">
+        <TitleSection
+          title="Generate random json"
+          subtitle="Reload to try it!"
+        />
+        <div class="w-full h-full flex flex-col items-center justify-center pt-12 pb-10 px-4">
+          <JsonViewer
+            data={data.value}
           />
-          <div class="w-full h-full flex flex-col items-center justify-center pt-12 pb-10">
-            <JsonViewer
-              data={data.value}
+          <div className="pt-8">
+            <RefreshButton
+              onClick={handleClick}
             />
-            <div className="pt-8">
-              <RefreshButton
-                onClick={handleClick}
-              />
-            </div>
           </div>
-        </main>
+        </div>
+      </main>
     </>
   );
 }

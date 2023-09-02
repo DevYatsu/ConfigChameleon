@@ -38,19 +38,16 @@ export default function App({ Component }: AppProps) {
         <base href="http://localhost:8000/" />
 
         <meta name="theme-color" content="#3730A3" />
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="manifest" href={asset("/manifest.json")} />
         <link rel="canonical" href="http://localhost:8000/" />
+        <link rel="preconnect" href={asset("/")} />
 
         <link
           rel="preconnect"
           href={asset("/")}
           crossOrigin="anonymous"
         />
-        <link
-          rel="icon"
-          href={asset("/images/favicon.ico")}
-          type="image/x-icon"
-        />
+
         <link rel="preconnect" href={asset("https://fonts.gstatic.com/")} />
         <script
           defer

@@ -10,8 +10,8 @@ import * as $4 from "./routes/api/joke.ts";
 import * as $5 from "./routes/csv/[outputType].tsx";
 import * as $6 from "./routes/greet/[name].tsx";
 import * as $7 from "./routes/index.tsx";
-import * as $8 from "./routes/json/[outputType].tsx";
-import * as $9 from "./routes/json/_middleware.ts";
+import * as $8 from "./routes/json/[outputType]/_middleware.ts";
+import * as $9 from "./routes/json/[outputType]/index.tsx";
 import * as $10 from "./routes/json/index.tsx";
 import * as $11 from "./routes/minify/[fileType].tsx";
 import * as $12 from "./routes/password.tsx";
@@ -30,8 +30,8 @@ const manifest = {
     "./routes/csv/[outputType].tsx": $5,
     "./routes/greet/[name].tsx": $6,
     "./routes/index.tsx": $7,
-    "./routes/json/[outputType].tsx": $8,
-    "./routes/json/_middleware.ts": $9,
+    "./routes/json/[outputType]/_middleware.ts": $8,
+    "./routes/json/[outputType]/index.tsx": $9,
     "./routes/json/index.tsx": $10,
     "./routes/minify/[fileType].tsx": $11,
     "./routes/password.tsx": $12,
