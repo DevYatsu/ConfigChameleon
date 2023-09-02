@@ -1,0 +1,89 @@
+import { RouteContext } from "$fresh/server.ts";
+import NavBar from "../../islands/Navbar.tsx";
+import { asset, Head } from "$fresh/runtime.ts";
+import TitleSection from "../../components/TitleSection.tsx";
+import JsonViewer from "../../components/JsonViewer.tsx";
+import RefreshButton from "../../components/RefreshButton.tsx";
+import { signal } from "@preact/signals";
+
+const data = signal<object | null>(null);
+
+export default async function (_req: Request, ctx: RouteContext) {
+  async function fetchRandomTodo() {
+    try {
+      const resp = await fetch(
+        `https://jsonplaceholder.typicode.com/todos/${
+          Math.floor(Math.random() * 100)
+        }`,
+      );
+
+      if (!resp.ok) {
+        return {
+          message: "Something went wrong!",
+        };
+      }
+      const data = await resp.json() as object;
+
+      return data;
+    } catch (error) {
+      return {
+        message: "Something went wrong!",
+      };
+    }
+  }
+
+  const handleClick = async () => {
+    console.log("efef");
+    data.value = await fetchRandomTodo();
+  };
+
+  data.value = await fetchRandomTodo();
+
+  return (
+    <>
+      <Head>
+        <title>Generate Random Json</title>
+        <meta
+          property="og:title"
+          content="Generate Random Json"
+        />
+        <meta
+          name="description"
+          content="Generate random json data on reload!"
+        />
+        <meta
+          property="og:description"
+          content="Generate random json data on reload!"
+        />
+        <link
+          rel="stylesheet"
+          href={asset(
+            "https://fonts.googleapis.com/css2?family=Pacifico:wght@400&display=swap",
+          )}
+        />
+        <link
+          rel="stylesheet"
+          href={asset(
+            "https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display:wght@400&display=swap",
+          )}
+        />
+      </Head>
+        <main class="h-full flex-1 flex flex-col">
+          <TitleSection
+            title="Generate random json"
+            subtitle="Reload to try it!"
+          />
+          <div class="w-full h-full flex flex-col items-center justify-center pt-12 pb-10">
+            <JsonViewer
+              data={data.value}
+            />
+            <div className="pt-8">
+              <RefreshButton
+                onClick={handleClick}
+              />
+            </div>
+          </div>
+        </main>
+    </>
+  );
+}
