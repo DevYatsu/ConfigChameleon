@@ -1,4 +1,4 @@
-import { defineRoute, Handlers } from "$fresh/server.ts";
+import { defineRoute, Handlers, RouteConfig } from "$fresh/server.ts";
 import ConvertionPage from "../../../components/ConvertionPage.tsx";
 import { generateFile } from "../../../utils/file.ts";
 import { retrieveRequestFile } from "../../../utils/retrieveRequestFile.ts";
@@ -9,6 +9,7 @@ import {
   JsonToYaml,
 } from "../../../utils/json.ts";
 import { supportedFormatTypes } from "../../../utils/supportedFormatTypes.ts";
+import { useCSP } from "$modules/fresh@1.4.2/runtime.ts";
 
 const fileType = "json";
 
@@ -120,3 +121,7 @@ export default defineRoute(async (_req, ctx) => {
     />
   );
 });
+
+export const config: RouteConfig = {
+  csp: true,
+};

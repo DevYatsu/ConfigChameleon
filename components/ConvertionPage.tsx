@@ -1,7 +1,6 @@
-import { Head } from "$fresh/runtime.ts";
+import { Head, useCSP } from "$fresh/runtime.ts";
 import { RouteConfig } from "$modules/fresh@1.4.2/server.ts";
 import FileInput from "../islands/FileInput.tsx";
-import NavBar from "../islands/Navbar.tsx";
 import { titleCase } from "case";
 
 type ConvertionPageProps = {
@@ -43,7 +42,3 @@ export default function ConvertionPage(
     </>
   );
 }
-
-export const config: RouteConfig = {
-  csp: true,
-};

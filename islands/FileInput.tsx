@@ -1,10 +1,9 @@
 import { useEffect, useState } from "preact/hooks";
-import { asset, Head, useCSP } from "$fresh/runtime.ts";
+import { asset, Head } from "$fresh/runtime.ts";
 import { ErrorToast } from "../utils/Toast.ts";
 import { fetchDataAndDownloadFile, isFileSizeTooLarge } from "../utils/file.ts";
 import Loader from "../components/Loader.tsx";
 import { signal } from "@preact/signals";
-import { RouteConfig } from "$modules/fresh@1.4.2/server.ts";
 
 const isLoading = signal(false);
 const initialFile = signal<File | null>(null);
@@ -16,6 +15,7 @@ export default function FileInput(
     if (!e?.target?.files[0]) {
       return;
     }
+    
     const file: File = e.target.files[0];
     if (file.type.indexOf(filetype) === -1) {
       ErrorToast(`Invalid file type! Expected '${filetype}' file`);
@@ -53,13 +53,6 @@ export default function FileInput(
       }
     }
   }, [initialFile.value]);
-
-  useCSP((csp) => {
-    if (!csp.directives.styleSrcElem) csp.directives.styleSrcElem = [];
-    csp.directives.styleSrcElem.push(
-      "https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css",
-    );
-  });
 
   return (
     <>
@@ -124,7 +117,3 @@ function Input(
     </div>
   );
 }
-
-export const config: RouteConfig = {
-  csp: true,
-};

@@ -1,11 +1,10 @@
-import NavBar from "../islands/Navbar.tsx";
-import { PageProps, RouteConfig } from "$fresh/server.ts";
-import { asset, Head, useCSP } from "$fresh/runtime.ts";
+import { RouteConfig } from "$fresh/server.ts";
+import { asset, Head } from "$fresh/runtime.ts";
 import ConversionButtonsSection from "../components/ConversionButtonsSection.tsx";
 import { supportedFormatTypes } from "../utils/supportedFormatTypes.ts";
 import TitleSection from "../components/TitleSection.tsx";
 
-export default function Home({ route }: PageProps) {
+export default function Home() {
   return (
     <>
       <Head>

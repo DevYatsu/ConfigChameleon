@@ -1,4 +1,4 @@
-import { defineRoute, Handlers } from "$fresh/server.ts";
+import { defineRoute, Handlers, RouteConfig } from "$fresh/server.ts";
 import ConvertionPage from "../../components/ConvertionPage.tsx";
 import { retrieveRequestFile } from "../../utils/retrieveRequestFile.ts";
 import { parse as parseYaml } from "npm:yaml";
@@ -124,3 +124,8 @@ export default defineRoute(async (_req, ctx) => {
     />
   );
 });
+
+
+export const config: RouteConfig = {
+  csp: true,
+};

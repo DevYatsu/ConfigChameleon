@@ -1,6 +1,5 @@
 import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import { Head, useCSP } from "$fresh/runtime.ts";
-import NavBar from "../islands/Navbar.tsx";
 import generateComplexPassword from "../utils/password.ts";
 
 export const handler: Handlers = {

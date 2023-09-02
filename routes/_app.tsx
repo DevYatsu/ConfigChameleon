@@ -24,6 +24,9 @@ export default function App({ Component }: AppProps) {
 
     if (!csp.directives.styleSrc) csp.directives.styleSrc = [];
     csp.directives.styleSrc.push("https://fonts.googleapis.com/");
+    csp.directives.styleSrc.push(
+      "https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css",
+    );
   });
 
   return (

@@ -1,3 +1,4 @@
+import { RouteConfig } from "$modules/fresh@1.4.2/server.ts";
 import NavBar from "../../islands/Navbar.tsx";
 
 export default function Minify() {
@@ -8,3 +9,8 @@ export default function Minify() {
     </>
   );
 }
+
+
+export const config: RouteConfig = {
+  csp: true,
+};

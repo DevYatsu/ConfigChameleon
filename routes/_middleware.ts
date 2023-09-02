@@ -29,9 +29,32 @@ export async function handler(req: Request, ctx: MiddlewareHandlerContext) {
     "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With",
   );
   headers.set(
-    "Access-Control-Allow-Methods",
-    "GET",
+    "Strict-Transport-Security",
+    "max-age=31536000; includeSubDomains; preload",
   );
-
+  headers.set(
+    "x-content-type-options",
+    "nosniff",
+  );
+  headers.set(
+    "x-frame-options",
+    "DENY",
+  );
+  headers.set(
+    "x-xss-protection",
+    "1; mode=block",
+  );
+  headers.set(
+    "referrer-policy",
+    "strict-origin-when-cross-origin",
+  );
+  headers.set(
+    "feature-policy",
+    "camera 'none'; microphone 'none'",
+  );
+  headers.set(
+    "Cache-Control",
+    "max-age=3600, public",
+  );
   return resp;
 }

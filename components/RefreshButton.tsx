@@ -1,6 +1,7 @@
-export default function B(
-  { onClick }: { onClick: (event: MouseEvent) => void | Promise<void> },
+export default function Button(
+  { onClick }: { onClick: () => void },
 ) {
+  console.log("rendered");
   return (
     <button
       onClick={onClick}

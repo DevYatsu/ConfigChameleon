@@ -1,5 +1,5 @@
-import { RouteContext } from "$fresh/server.ts";
-import { asset, Head } from "$fresh/runtime.ts";
+import { RouteConfig, RouteContext } from "$fresh/server.ts";
+import { asset, Head, useCSP } from "$fresh/runtime.ts";
 import TitleSection from "../../components/TitleSection.tsx";
 import JsonViewer from "../../components/JsonViewer.tsx";
 import RefreshButton from "../../components/RefreshButton.tsx";
@@ -30,10 +30,6 @@ export default async function (_req: Request, ctx: RouteContext) {
       };
     }
   }
-
-  const handleClick = async () => {
-    data.value = await fetchRandomTodo();
-  };
 
   data.value = await fetchRandomTodo();
 
@@ -77,7 +73,10 @@ export default async function (_req: Request, ctx: RouteContext) {
           />
           <div className="pt-8">
             <RefreshButton
-              onClick={handleClick}
+              onClick={async () => {
+                console.log("click");
+                data.value = await fetchRandomTodo();
+              }}
             />
           </div>
         </div>
@@ -85,3 +84,7 @@ export default async function (_req: Request, ctx: RouteContext) {
     </>
   );
 }
+
+export const config: RouteConfig = {
+  csp: true,
+};

@@ -10,3 +10,4 @@ and see if i could easily use it in future projects.
 - Add a copy button on /password page
 - Add a reload button on /json page
 - Add features to minify files
+- Find a way to change some headers when several middlewares are present
