@@ -57,8 +57,7 @@ export default defineRoute(async (_req, ctx) => {
           )}
         />
       </Head>
-      <NavBar />
-      <TitleSection title="Coming soon"></TitleSection>
+      <TitleSection title="Coming soon..."></TitleSection>
     </>
   );
 

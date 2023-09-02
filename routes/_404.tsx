@@ -44,4 +44,5 @@ export default function Error404() {
 
 export const config: RouteConfig = {
   csp: true,
+  skipInheritedLayouts: true,
 };

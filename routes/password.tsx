@@ -27,8 +27,6 @@ export default function PasswordPage({ data, route }: PageProps) {
           content="A simple random passwords generator. Reload and a new password is generated."
         />
       </Head>
-      <div class="h-full min-h-screen flex flex-col">
-        <NavBar route={route} />
         <main class="h-full w-full mt-6 sm:mt-0 px-5 flex-1 flex items-center justify-center">
           <div class="h-2/5 flex flex-col sm:flex-row px-5 space-y-6 sm:space-y-0 sm:space-x-4 pb-12">
             <h1 class="text-2xl text-red-500 md:text-3xl text-center">
@@ -39,7 +37,6 @@ export default function PasswordPage({ data, route }: PageProps) {
             </p>
           </div>
         </main>
-      </div>
     </>
   );
 }

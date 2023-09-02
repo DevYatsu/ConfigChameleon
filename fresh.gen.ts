@@ -4,18 +4,19 @@
 
 import * as $0 from "./routes/_404.tsx";
 import * as $1 from "./routes/_app.tsx";
-import * as $2 from "./routes/_middleware.ts";
-import * as $3 from "./routes/api/joke.ts";
-import * as $4 from "./routes/csv/[outputType].tsx";
-import * as $5 from "./routes/greet/[name].tsx";
-import * as $6 from "./routes/index.tsx";
-import * as $7 from "./routes/json.tsx";
+import * as $2 from "./routes/_layout.tsx";
+import * as $3 from "./routes/_middleware.ts";
+import * as $4 from "./routes/api/joke.ts";
+import * as $5 from "./routes/csv/[outputType].tsx";
+import * as $6 from "./routes/greet/[name].tsx";
+import * as $7 from "./routes/index.tsx";
 import * as $8 from "./routes/json/[outputType].tsx";
 import * as $9 from "./routes/json/_middleware.ts";
-import * as $10 from "./routes/minify/[fileType].tsx";
-import * as $11 from "./routes/password.tsx";
-import * as $12 from "./routes/xml/[outputType].tsx";
-import * as $13 from "./routes/yaml/[outputType].tsx";
+import * as $10 from "./routes/json/index.tsx";
+import * as $11 from "./routes/minify/[fileType].tsx";
+import * as $12 from "./routes/password.tsx";
+import * as $13 from "./routes/xml/[outputType].tsx";
+import * as $14 from "./routes/yaml/[outputType].tsx";
 import * as $$0 from "./islands/FileInput.tsx";
 import * as $$1 from "./islands/Navbar.tsx";
 
@@ -23,18 +24,19 @@ const manifest = {
   routes: {
     "./routes/_404.tsx": $0,
     "./routes/_app.tsx": $1,
-    "./routes/_middleware.ts": $2,
-    "./routes/api/joke.ts": $3,
-    "./routes/csv/[outputType].tsx": $4,
-    "./routes/greet/[name].tsx": $5,
-    "./routes/index.tsx": $6,
-    "./routes/json.tsx": $7,
+    "./routes/_layout.tsx": $2,
+    "./routes/_middleware.ts": $3,
+    "./routes/api/joke.ts": $4,
+    "./routes/csv/[outputType].tsx": $5,
+    "./routes/greet/[name].tsx": $6,
+    "./routes/index.tsx": $7,
     "./routes/json/[outputType].tsx": $8,
     "./routes/json/_middleware.ts": $9,
-    "./routes/minify/[fileType].tsx": $10,
-    "./routes/password.tsx": $11,
-    "./routes/xml/[outputType].tsx": $12,
-    "./routes/yaml/[outputType].tsx": $13,
+    "./routes/json/index.tsx": $10,
+    "./routes/minify/[fileType].tsx": $11,
+    "./routes/password.tsx": $12,
+    "./routes/xml/[outputType].tsx": $13,
+    "./routes/yaml/[outputType].tsx": $14,
   },
   islands: {
     "./islands/FileInput.tsx": $$0,

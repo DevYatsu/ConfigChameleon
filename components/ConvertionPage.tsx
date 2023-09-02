@@ -32,17 +32,14 @@ export default function ConvertionPage(
           content={`A simple way to convert ${title.toLowerCase()}.`}
         />
       </Head>
-      <div class="h-full min-h-screen flex flex-col">
-        <NavBar cls="mb-10" />
-        <main class="h-full text-black dark:text-white text-center py-8 px-3 flex flex-col items-center justify-center flex-1">
-          <h2 class="font-bold text-3xl tracking-tight sm:text-4xl">
-            {titleCase(title)}
-          </h2>
-          <div class="pt-12 md:pt-28">
-            <FileInput filetype={inputType} outputType={outputType} />
-          </div>
-        </main>
-      </div>
+      <main class="h-full text-black dark:text-white text-center py-8 px-3 flex flex-col items-center justify-center flex-1">
+        <h2 class="font-bold text-3xl tracking-tight sm:text-4xl">
+          {titleCase(title)}
+        </h2>
+        <div class="pt-12 md:pt-28">
+          <FileInput filetype={inputType} outputType={outputType} />
+        </div>
+      </main>
     </>
   );
 }

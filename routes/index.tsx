@@ -37,7 +37,6 @@ export default function Home({ route }: PageProps) {
           content="ConfigChameleon | Transforming Formats, Simplifying Workflows and minify your workload."
         />
       </Head>
-      <NavBar route={route} />
       <TitleSection
         title="Convert files"
         subtitle="Up to 10 mb"

@@ -57,7 +57,7 @@ export default function App({ Component }: AppProps) {
           src={asset("http://localhost:8000/service-worker.js")}
         />
       </head>
-      <body class="h-full min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white ">
+      <body class="h-full min-h-screen w-full bg-white dark:bg-gray-900 text-black dark:text-white ">
         <Component />
       </body>
     </html>
