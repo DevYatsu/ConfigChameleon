@@ -38,19 +38,11 @@ export default function App({ Component }: AppProps) {
         <meta property="og:site_name" content="ConfigChameleon" />
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
         <meta http-equiv="Content-Security-Policy" content="base-uri 'self'" />
-
         <meta name="theme-color" content="#3730A3" />
-        <link rel="manifest" href={asset("/manifest.json")} />
-        <link rel="canonical" href="http://localhost:8000/" />
         <link rel="preconnect" href={asset("/")} />
-
-        <link
-          rel="preconnect"
-          href={asset("/")}
-          crossOrigin="anonymous"
-        />
-
         <link rel="preconnect" href={asset("https://fonts.gstatic.com/")} />
+
+        <link rel="manifest" href={asset("/manifest.json")} />
         <script
           defer
           src={asset("/service-worker.js")}

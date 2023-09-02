@@ -19,6 +19,7 @@ import * as $13 from "./routes/xml/[outputType].tsx";
 import * as $14 from "./routes/yaml/[outputType].tsx";
 import * as $$0 from "./islands/FileInput.tsx";
 import * as $$1 from "./islands/Navbar.tsx";
+import * as $$2 from "./islands/RefreshButton.tsx";
 
 const manifest = {
   routes: {
@@ -41,6 +42,7 @@ const manifest = {
   islands: {
     "./islands/FileInput.tsx": $$0,
     "./islands/Navbar.tsx": $$1,
+    "./islands/RefreshButton.tsx": $$2,
   },
   baseUrl: import.meta.url,
 };

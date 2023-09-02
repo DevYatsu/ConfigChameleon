@@ -1,11 +1,8 @@
-export default function Button(
-  { onClick, data }: { onClick: () => void; data: any },
-) {
+export default function Wrapper() {
   return (
     <button
       onClick={() => {
-        data.value = { "test": "test" };
-        console.log(data);
+        globalThis.location.reload();
       }}
       class="relative inline-block px-4 py-2 font-medium group"
     >

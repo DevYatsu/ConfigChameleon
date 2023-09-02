@@ -1,36 +1,41 @@
 import { RouteConfig, RouteContext } from "$fresh/server.ts";
-import { asset, Head, useCSP } from "$fresh/runtime.ts";
+import { asset, Head } from "$fresh/runtime.ts";
 import TitleSection from "../../components/TitleSection.tsx";
 import JsonViewer from "../../components/JsonViewer.tsx";
-import RefreshButton from "../../components/RefreshButton.tsx";
+import RefreshButton from "../../islands/RefreshButton.tsx";
 import { signal } from "@preact/signals";
 
-const data = signal<object | null>(null);
+export async function fetchRandomTodo() {
+  try {
+    const randomNum = Math.floor(Math.random() * 99);
+    const resp = await fetch(
+      `https://jsonplaceholder.typicode.com/todos/${randomNum}`,
+    );
 
-export default async function (_req: Request, ctx: RouteContext) {
-  async function fetchRandomTodo() {
-    try {
-      const randomNum = Math.floor(Math.random() * 100);
-      const resp = await fetch(
-        `https://jsonplaceholder.typicode.com/todos/${randomNum}`,
-      );
-
-      if (!resp.ok) {
-        return {
-          message: "Something went wrong!",
-        };
-      }
-      const data = await resp.json() as object;
-
-      return data;
-    } catch (error) {
+    if (!resp.ok) {
       return {
-        message: "Something went wrong!",
+        error: "Failed to retrieve data!",
+        userMessage: "Something went wrong! Try again!",
+        ok: false,
+        status: 300,
       };
     }
-  }
+    const data = await resp.json() as object;
 
-  data.value = await fetchRandomTodo();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return {
+      userMessage: "Something went wrong! Try again!",
+      error: "Failed to retrieve data!",
+      ok: false,
+      status: 300,
+    };
+  }
+}
+
+export default async function Page(_req: Request, _ctx: RouteContext) {
+  const data = await fetchRandomTodo();
 
   return (
     <>
@@ -66,17 +71,10 @@ export default async function (_req: Request, ctx: RouteContext) {
           title="Generate random json"
           subtitle="Reload to try it!"
         />
-        <div class="w-full h-full flex flex-col items-center justify-center sm:pt-12 pb-10 px-4">
-          <JsonViewer
-            data={data.value}
-          />
+        <div class="w-full h-full flex flex-col items-center justify-center pt-6 sm:pt-12 pb-10 px-4">
+          <JsonViewer data={data} />
           <div className="pt-8">
-            <RefreshButton
-              onClick={async () => {
-                console.log("click");
-              }}
-              data={data.value}
-            />
+            <RefreshButton />
           </div>
         </div>
       </main>

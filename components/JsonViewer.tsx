@@ -15,7 +15,7 @@ export default function Viewer(
     data = { "data-retrieved": false };
   }
 
-  const jsonString = beautify(data, null, 4, 80);
+  const jsonString = beautify(data, null, 4, 70);
 
   const jsonHighlighted =
     hljs.highlight(jsonString, { language: "json" }).value;
