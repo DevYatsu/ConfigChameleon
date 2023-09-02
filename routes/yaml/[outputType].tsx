@@ -65,8 +65,15 @@ export const handler: Handlers<File> = {
             }
           }
           case "csv": {
-            if (jsonObj instanceof Array) {
+            if (jsonObj instanceof Object) {
               const csvContent = JsonToCSV(jsonObj);
+              if (csvContent.trim() === "") {
+                return new Response(
+                  "Xml to Csv conversion requires specific json file content!",
+                  { status: 400 },
+                );
+              }
+
               const file: File = generateFile(
                 csvContent,
                 "application/csv",
@@ -124,7 +131,6 @@ export default defineRoute(async (_req, ctx) => {
     />
   );
 });
-
 
 export const config: RouteConfig = {
   csp: true,

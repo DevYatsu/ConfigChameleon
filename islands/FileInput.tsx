@@ -15,7 +15,7 @@ export default function FileInput(
     if (!e?.target?.files[0]) {
       return;
     }
-    
+
     const file: File = e.target.files[0];
     if (file.type.indexOf(filetype) === -1) {
       ErrorToast(`Invalid file type! Expected '${filetype}' file`);
@@ -35,6 +35,10 @@ export default function FileInput(
 
   useEffect(() => {
     if (initialFile.value) {
+      if (initialFile.value.size === 0) {
+        ErrorToast("Cannot process empty file");
+        return;
+      }
       isLoading.value = true;
       DownloadFile();
     }

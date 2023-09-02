@@ -2,7 +2,7 @@ import { defineRoute, Handlers, RouteConfig } from "$fresh/server.ts";
 import ConvertionPage from "../../components/ConvertionPage.tsx";
 import { retrieveRequestFile } from "../../utils/retrieveRequestFile.ts";
 import { supportedFormatTypes } from "../../utils/supportedFormatTypes.ts";
-import { xml2js } from "$modules/xml2js@1.0.0/mod.ts";
+import { parseString as parseXmlString } from "npm:xml2js";
 import { generateFile } from "../../utils/file.ts";
 import { JsonToCSV, JsonToYaml } from "../../utils/json.ts";
 import xmlButPrettier from "npm:xml-but-prettier";
@@ -40,9 +40,10 @@ export const handler: Handlers<File> = {
       const xmlContent = textDecoder.decode(uint8Array);
 
       try {
-        const jsonObj = xml2js(xmlContent, {
-          compact: true,
-        });
+        const jsonObj = await parseXmlString(xmlContent) as Record<
+          string,
+          unknown
+        >;
 
         switch (outputType) {
           case "json": {
@@ -53,16 +54,25 @@ export const handler: Handlers<File> = {
             return new Response(file);
           }
           case "yaml": {
+            console.log(jsonObj);
+
             const YamlContent = JsonToYaml(jsonObj);
             const file = generateFile(
-              JSON.stringify(YamlContent),
+              YamlContent,
               "application/yaml",
             );
             return new Response(file);
           }
           case "csv": {
-            if (jsonObj instanceof Array) {
+            if (jsonObj instanceof Object) {
               const csvContent = JsonToCSV(jsonObj);
+              if (csvContent.trim() === "") {
+                return new Response(
+                  "Xml to Csv conversion requires specific json file content!",
+                  { status: 400 },
+                );
+              }
+
               const file: File = generateFile(
                 csvContent,
                 "application/csv",

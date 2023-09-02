@@ -26,5 +26,13 @@ export const retrieveRequestFile = async (
     );
   }
 
+  const content = await file.text();
+  if (content.trim() === "") {
+    return new Response(
+      "Cannot proceed empty file",
+      { status: 400 },
+    );
+  }
+
   return file;
 };

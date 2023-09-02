@@ -1,28 +1,27 @@
-import { js2xml } from "js2xml";
+import xml2js from "npm:xml2js";
 import { json2yaml } from "https://deno.land/x/json2yaml@v1.0.1/mod.ts";
 import JsonCSV from "npm:papaparse@5.0.2";
 import { JsonDBO, jsonToHTML } from "npm:markuptojson";
 import { stringify as stringifyToml } from "$std/toml/stringify.ts";
 
 export function JsonToXml(obj: Record<string, unknown>): string {
-  return js2xml(obj, {
-    compact: true,
-    spaces: 4,
-  });
+  const builder = new xml2js.Builder();
+  return builder.buildObject(obj);
 }
 export function JsonToToml(obj: Record<string, unknown>): string {
   return stringifyToml(obj);
 }
 export function JsonToYaml(jsonContent: Record<string, unknown>): string {
-  const jsonString = JSON.stringify(jsonContent);
-  return json2yaml(jsonString);
+  const yamlString = json2yaml(JSON.stringify(jsonContent));
+  
+  return yamlString;
 }
 export function JsonToHTML(
   obj: Record<string, unknown> | Record<string, unknown>[],
 ): string {
   return jsonToHTML(obj as unknown as JsonDBO[]);
 }
-export function JsonToCSV(obj: Record<string, unknown>[]): string {
+export function JsonToCSV(obj: Record<string, unknown>): string {
   return JsonCSV.unparse(obj);
 }
 export function JsonToJSONL(obj: Record<string, unknown>): string {

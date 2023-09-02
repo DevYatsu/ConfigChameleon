@@ -58,7 +58,7 @@ export const handler: Handlers<File> = {
               return new Response(file);
             } catch (error) {
               return new Response(
-                "Yaml to TOML conversion requires specific yaml file content!",
+                "Csv to TOML conversion requires specific yaml file content!",
                 { status: 400 },
               );
             }
