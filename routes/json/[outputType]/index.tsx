@@ -9,7 +9,6 @@ import {
   JsonToYaml,
 } from "../../../utils/json.ts";
 import { supportedFormatTypes } from "../../../utils/supportedFormatTypes.ts";
-import { useCSP } from "$modules/fresh@1.4.2/runtime.ts";
 
 const fileType = "json";
 

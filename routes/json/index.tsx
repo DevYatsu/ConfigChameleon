@@ -10,10 +10,9 @@ const data = signal<object | null>(null);
 export default async function (_req: Request, ctx: RouteContext) {
   async function fetchRandomTodo() {
     try {
+      const randomNum = Math.floor(Math.random() * 100);
       const resp = await fetch(
-        `https://jsonplaceholder.typicode.com/todos/${
-          Math.floor(Math.random() * 100)
-        }`,
+        `https://jsonplaceholder.typicode.com/todos/${randomNum}`,
       );
 
       if (!resp.ok) {
@@ -67,7 +66,7 @@ export default async function (_req: Request, ctx: RouteContext) {
           title="Generate random json"
           subtitle="Reload to try it!"
         />
-        <div class="w-full h-full flex flex-col items-center justify-center pt-12 pb-10 px-4">
+        <div class="w-full h-full flex flex-col items-center justify-center sm:pt-12 pb-10 px-4">
           <JsonViewer
             data={data.value}
           />
@@ -75,8 +74,8 @@ export default async function (_req: Request, ctx: RouteContext) {
             <RefreshButton
               onClick={async () => {
                 console.log("click");
-                data.value = await fetchRandomTodo();
               }}
+              data={data.value}
             />
           </div>
         </div>
