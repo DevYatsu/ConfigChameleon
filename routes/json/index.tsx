@@ -6,7 +6,7 @@ import RefreshButton from "../../islands/RefreshButton.tsx";
 
 export async function fetchRandomTodo() {
   try {
-    const randomNum = Math.floor(Math.random() * 99);
+    const randomNum = Math.floor(Math.random() * 200);
     const resp = await fetch(
       `https://jsonplaceholder.typicode.com/todos/${randomNum}`,
     );
