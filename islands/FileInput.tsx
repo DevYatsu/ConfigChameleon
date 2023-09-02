@@ -100,6 +100,7 @@ function Input(
         type="file"
         accept={`.${filetype}`}
         onInput={onInput}
+        aria-label={"file input"}
       />
       <svg
         xmlns="http://www.w3.org/2000/svg"

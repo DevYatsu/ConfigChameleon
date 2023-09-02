@@ -33,7 +33,7 @@ export default function ConvertionPage(
         />
       </Head>
       <main class="h-full text-black dark:text-white text-center flex flex-col items-center justify-center flex-1">
-        <div className="flex items-center justify-center pr-24">
+        <div className="flex justify-center text-center xl:pr-24">
           <TitleSection title={titleCase(title)} subtitle={subtitle} />
         </div>
         <div class="pt-12 md:pt-28">
