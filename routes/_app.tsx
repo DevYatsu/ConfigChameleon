@@ -38,7 +38,6 @@ export default function App({ Component }: AppProps) {
         <meta property="og:site_name" content="ConfigChameleon" />
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
         <meta http-equiv="Content-Security-Policy" content="base-uri 'self'" />
-        <base href="http://localhost:8000/" />
 
         <meta name="theme-color" content="#3730A3" />
         <link rel="manifest" href={asset("/manifest.json")} />
@@ -54,7 +53,7 @@ export default function App({ Component }: AppProps) {
         <link rel="preconnect" href={asset("https://fonts.gstatic.com/")} />
         <script
           defer
-          src={asset("http://localhost:8000/service-worker.js")}
+          src={asset("/service-worker.js")}
         />
       </head>
       <body class="h-full min-h-screen w-full bg-white dark:bg-gray-900 text-black dark:text-white ">

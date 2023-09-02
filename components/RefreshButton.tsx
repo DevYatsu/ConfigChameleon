@@ -12,7 +12,7 @@ export default function Button(
       <span class="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black">
       </span>
       <span class="relative text-black group-hover:text-white">
-        Refresh <span class="group-hover:hidden">?</span>
+        Refresh Data <span class="group-hover:hidden">?</span>
       </span>
     </button>
   );

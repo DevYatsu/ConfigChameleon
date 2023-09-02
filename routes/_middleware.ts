@@ -52,9 +52,6 @@ export async function handler(req: Request, ctx: MiddlewareHandlerContext) {
     "feature-policy",
     "camera 'none'; microphone 'none'",
   );
-  headers.set(
-    "Cache-Control",
-    "max-age=3600, public",
-  );
+
   return resp;
 }
